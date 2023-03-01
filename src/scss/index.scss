@@ -1,0 +1,60 @@
+@forward 'components';
+@forward 'pages';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Cinzel&family=Cormorant+Garamond:wght@300&family=Oswald:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@100;300;400&display=swap');
+
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+*::-webkit-scrollbar {
+    background-color: #000000;
+    width: 5px;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(207, 207, 207);
+    border-radius: 100px;
+    height: 50%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hsl(0, 0%, 0%);
+    color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+    background-color: #000000;
+    width: 5px;
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(207, 207, 207);
+    border-radius: 100px;
+    height: 50%;
+  }
+a,a::before,a:active,a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+ul {
+    list-style: none;
+}
+h5 {
+    padding-top: 9px;
+    padding-left: 0px;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgb(168, 168, 168);
+    font-family: 'Rokkitt', serif;
+}

@@ -1,0 +1,55 @@
+.menuoff {
+    position: fixed;
+    left: -50vw;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: rgb(22, 32, 32);
+    z-index: 9999999999;
+    transition: .4s;
+    @media (min-width: 865px) {
+        display: none;
+    }
+}
+
+.menuon {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: rgb(22, 32, 32);
+    z-index: 9999999999;
+    transition: .4s;
+    @media (min-width: 865px) {
+        display: none;
+    }
+}
+
+.sayeon {
+    position: fixed;
+    top: 0;
+    right: 0vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999999;
+    transition: .4s;
+    @media (min-width: 865px) {
+        display: none;
+    }
+}
+
+.sayeoff {
+    position: fixed;
+    top: 0;
+    right: 0vw;
+    width: 0vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999999;
+    transition: .4s;
+    @media (min-width: 865px) {
+        display: none;
+    }
+}

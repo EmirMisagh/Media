@@ -1,0 +1,125 @@
+.divlogin {
+    .butt {
+        padding: 4px 20px;
+        padding-bottom: 6px;
+        border-radius: 20px;
+        background: none;
+        color: rgb(80, 80, 80);
+        border: 0.5px solid rgb(75, 75, 75);
+        font-size: 22px;
+        transition: .2s;
+    }
+    .butt:hover {
+        background-color: rgb(75, 75, 75);
+        color: rgb(250, 250, 250);
+    }
+    &__backlogin {
+        div {
+            padding: 0px 35px;
+
+            h3 {
+                margin: 0px 0;
+            }
+            font-family: 'Kaushan Script', cursive;
+        }
+        .pm {
+            margin-left: 35px;
+            padding: 0;
+            padding-left: 10px;
+            display: flex;
+            @media (max-width: 865px) {
+                display: grid;
+            }
+            p {
+                background-color: rgba(255, 255, 255,0.02);
+                color: rgb(150, 150, 150);
+                margin-right: 30%;
+                padding: 25px;
+                padding-bottom: 50px;
+                font-family: 'Roboto Condensed', sans-serif;
+                border-radius: 25px;
+                margin-top: 40px;
+                @media (max-width: 865px) {
+                    margin-right: 0;
+                }
+            }
+            div {
+                padding: 10px;
+            }
+        }
+    }
+
+    &__google {
+        text-align: right;
+        padding: 0px 0;
+        margin-top: 30px;
+        h4 {
+            padding: 0 20px;
+            font-family: 'Bungee Shade', cursive;
+            font-family: 'Creepster', cursive;
+            font-family: 'Kaushan Script', cursive;
+            font-family: 'Press Start 2P', cursive;
+            font-family: 'Rubik Mono One', sans-serif;
+            font-family: 'Yellowtail', cursive;
+            font-family: 'Great Vibes', cursive;
+        }
+        button {
+            background-color: rgba(255, 255, 255,0.02);
+            width: 300px;
+            padding: 15px 0px;
+            border-radius: 45px;
+            margin-top: 5px;
+            color: rgb(192, 192, 192);
+            font-family: 'Rokkitt', serif;
+            font-size: 19px;
+        }
+        button:hover {
+            background-color: rgba(255, 255, 255,0.06);
+        }
+    }
+
+    &__login {
+        font-family: 'Rokkitt', serif;
+        height: auto;
+        padding: 40px 30px;
+        border: 1px solid rgb(48, 48, 48);
+        border-radius: 15px;
+        margin: 0 0px;
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        h5 {
+            color: rgb(179, 179, 179);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        label {
+            text-align: left;
+            width: 100%;
+            margin-top: 25px;
+            font-family: 'Rokkitt', serif;
+        }
+
+        input {
+            width: 100%;
+            background: none;
+            outline: none;
+            border: 0.5px solid rgb(85, 85, 85);
+            border-radius: 8px;
+            color: #fff;
+            padding: 10px 20px;
+            font-family: 'Rokkitt', serif;
+        }
+
+        button {
+            margin: 25px 0;
+            margin-right: 10px;
+           
+        }
+    }
+}

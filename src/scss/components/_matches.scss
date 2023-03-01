@@ -1,0 +1,69 @@
+.match {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgb(221, 221, 221);
+    font-weight: 500;
+    width: 100%;
+    height: 110px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+
+    cursor: pointer;
+    .left {
+        width: 35%;
+        padding: 5px 0;
+        font-family: 'Cinzel', serif;
+        img {
+            width: 55%;
+            height: 65%;
+            margin: 0;
+        }
+        p {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 0;
+            margin-top: 4px;
+        }
+    }
+    .date {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+        small {
+            font-size: 11px;
+            font-weight: 900;
+        }
+        b {
+            font-size: 26px;
+            font-weight: 900;
+            margin: 0;
+            padding-top: 0;
+        }
+    }
+    .right {
+        padding: 5px 0;
+        width: 35%;
+        font-family: 'Cinzel', serif;
+        img {
+            width: 55%;
+            height: 65%;
+            margin: 0;
+        }
+        p {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+            padding: 0;
+        }
+    }
+}
+
+.match:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: aliceblue;
+}

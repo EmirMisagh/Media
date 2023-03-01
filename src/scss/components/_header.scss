@@ -1,0 +1,322 @@
+.navic {
+    &__top {
+        background-color: rgb(255, 255, 255);
+        margin: 0;
+        padding: 0 15px;
+
+        .c1 {
+            padding: 0 15px;
+            display: flex;
+
+            h3 {
+                padding-top: 9px;
+                padding-bottom: 0;
+                margin-top: 0;
+                margin: 0;
+                color: #000;
+                font-weight: 900;
+                font-family: 'Cinzel', serif;
+                letter-spacing: 1px;
+            }
+
+            small {
+                font-size: 12px;
+                color: rgb(0, 0, 0);
+                padding: 15px 0px;
+                padding-top: 21px;
+                font-family: 'Cormorant Garamond', serif;
+                font-family: 'Cinzel', serif;
+                font-weight: 700;
+            }
+        }
+
+        .c2 {
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            padding: 11px 25px;
+
+            input {
+                border: 0.1px solid rgb(134, 134, 134);
+                padding: 1px 18px;
+                border-radius: 50px 0px 0px 50px;
+                background: none;
+                min-width: 110px;
+                max-width: 200px;
+            }
+
+            button {
+                border: 0.1px solid rgb(128, 128, 128);
+                padding: 1px 10px;
+                border-radius: 0px 50px 50px 0px;
+                background: none;
+                transition: .4s;
+
+                i {
+                    font-weight: bold;
+                }
+            }
+
+            button:hover {
+                background-color: black;
+                color: aliceblue;
+                border: 0.1px solid rgb(0, 0, 0);
+            }
+        }
+
+        .c3 {
+            justify-content: right;
+            text-align: right;
+            display: flex;
+            padding: 10px 15px;
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+
+            button {
+                padding: 4px 15px;
+                color: rgb(0, 0, 0);
+                margin: 0px 3px;
+
+            }
+
+            button:hover {
+                border: 1px solid;
+            }
+        }
+    }
+
+    &__bottom {
+        padding-top: 10px;
+        background-color: rgb(22, 32, 32);
+      
+        .Navbary {
+            background-color: rgb(12, 12, 12);
+            margin: 0px auto;
+            width: 96%;
+            padding: 0px 10px;
+            border-radius: 30px;
+            border: 1px solid rgb(68, 68, 68);
+            transition: .0s;
+            z-index: 9999;
+            .c1 {
+                display: flex;
+                padding: 0px 20px;
+                color: rgb(212, 212, 212);
+                font-weight: bold;
+               
+                li {
+                    margin: 0px 10px;
+                    list-style: none;
+                    padding: 12px 0;
+                    font-family: Georgia, 'Times New Roman', Times, serif;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    color: rgb(245, 0, 0);
+                }
+
+                li[id='nav-foul'] {
+                    @media (max-width: 865px) {
+                        display: none;
+                    }
+                }
+
+                li[id='btn-login'] {
+                    color: hsl(0, 100%, 63%);
+
+                    @media (min-width: 865px) {
+                        display: none;
+                        color: hsl(0, 100%, 63%);
+                    }
+                }
+
+                .Footballdiv,
+                .NBAdiv,
+                .Basketballdiv {
+                    display: none;
+                    grid-template-columns: 2fr 2fr 2fr 2fr;
+                    position: fixed;
+                    width: 100%;
+                    background-color: rgb(255, 255, 255);
+                    color: #000;
+                    margin-top: 11px;
+                    left: 0;
+                    z-index: 9999;
+                    padding: 15px 0px;
+                    font-family: 'Roboto Condensed', sans-serif;
+                    @media (max-width: 865px) {
+                        position: fixed;
+                        right: 0;
+                        top: 0;
+                        width: 50vw;
+                        height: 100vh;
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0 25px;
+                        border-left: 0.5px solid rgb(212, 212, 212);
+                    }
+
+                    li:last-child {
+                        border: 0;
+                    }
+
+                    li {
+                        margin: 0;
+                        font-weight: 900;
+                        font-size: 17px;
+                        padding: 10px 0px;
+                        border-bottom: 0.5px solid rgb(212, 212, 212);
+                        color: #000;
+
+                        a {
+                            color: #000;
+                        }
+
+                        small {
+                            font-size: 13px;
+                            color: rgb(85, 85, 85);
+                        }
+                    }
+                }
+
+                .Football:hover .Footballdiv {
+                    display: grid;
+
+                    @media (max-width: 865px) {
+                        display: grid;
+                    }
+                }
+
+                .NBA:hover .NBAdiv {
+                    display: grid;
+                    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+                }
+
+                .Basketball:hover .Basketballdiv {
+                    display: flex;
+                }
+            }
+
+            .c3 {
+                text-align: right;
+                justify-content: right;
+                display: flex;
+                padding: 5px 16px;
+                color: rgb(255, 255, 255);
+
+                li[id='btn-menu'] {
+                    @media (min-width: 865px) {
+                        display: none;
+                    }
+
+                    @media (max-width: 865px) {
+                        display: block;
+                        font-size: 20px;
+                    }
+                }
+
+                li[id='btn-menu']:hover {
+                    scale: 1;
+                }
+
+                li {
+                    margin: 0px 10px;
+                    list-style: none;
+
+                    i {
+                        font-size: 22px;
+                        color: rgb(224, 224, 224);
+                    }
+
+                    i:hover {
+                        color: hsl(211, 100%, 68%);
+
+                    }
+
+                    button {
+                        background: none;
+                        color: rgb(255, 255, 255);
+                    }
+
+                    @media (max-width: 865px) {
+                        display: none;
+                    }
+                }
+
+                li:hover {
+                    scale: 1.2;
+                }
+
+            }
+        }
+    }
+
+    &__Results {
+        background-color: rgb(22, 32, 32);
+        margin: 0;
+        padding: 0px 30px;
+
+        .Result {
+            padding: 0;
+
+            &__swiper {
+                padding: 0px 40px;
+                z-index: 0;
+
+                @media (max-width: 865px) {
+                    padding: 0 10px;
+                }
+
+                div {
+                    display: flex;
+
+                    .logo {
+                        padding: 10px 15px;
+                        background: linear-gradient(to left, rgb(26, 114, 114)20%, rgb(22, 32, 32));
+                        cursor: pointer;
+                        font-family: 'Oswald', sans-serif;
+                        letter-spacing: 1px;
+                    }
+
+                    .logo:hover {
+                        background: linear-gradient(to left, rgb(22, 32, 32)20%, rgb(26, 114, 114));
+                    }
+
+                    .resul {
+                        display: grid;
+                        padding: 0 10px;
+                        width: 80px;
+                        margin: 0 0px;
+                        color: rgb(218, 218, 218);
+                        small {
+                            cursor: pointer;
+                            font-weight: 300;
+                          
+                        }
+                        b {
+
+                            padding-top: 5px;
+
+                        }
+
+                        i {
+                            margin-left: auto;
+                            float: right;
+                            color: rgb(120, 235, 235);
+                        }
+
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            padding: 2px 0px;
+                            padding-right: 5px;
+                        }
+                    }
+                }
+
+                .swiper-button-next {}
+            }
+        }
+    }
+}

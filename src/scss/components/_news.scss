@@ -1,0 +1,193 @@
+.newsSm {
+    width: 100%;
+    transition: .3s;
+    cursor: pointer;
+    @media (max-width: 767px) {
+        display: flex;
+        gap: 10px;
+    }
+    .video {
+        flex: 1;
+        width: 100%;
+        height: 160px;
+        position: relative;
+        @media (max-width: 767px) {
+            height: 130px;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255,0.2);
+        }
+        i {
+            position: absolute;
+            top: 30%;
+            left: 43%;
+            font-size: 32px;
+        }
+    }
+    .img {
+        width: 100%;
+        height: 160px;
+        @media (max-width: 767px) {
+            height: 130px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255,0.2);
+        }
+        flex: 1;
+    }
+    .title {
+        flex: 3;
+        padding: 0 2px;
+        @media (max-width: 767px) {
+            padding: 3px 0;
+            
+        }
+        .headsmall {
+            font-size: 12px;
+        }
+        h6 {
+            font-size: 18px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        p {
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: rgb(194, 194, 194);
+
+        }
+        small {
+            font-size: 12px;
+            color: rgb(122, 122, 122);
+        }
+    }
+}
+
+.newsSm:hover {
+    scale: 1.03;
+}
+
+.newsLg {
+    width: 100%;
+    position: relative;
+    border-radius: 0.5rem;
+    height: 230px;
+    cursor: pointer;
+    .img {
+        position: absolute;
+        width: 100%;
+        height: 99.5%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255,0.1);
+            transition: 0.3s;
+        }
+    }
+    .title {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        background: linear-gradient(to bottom, rgba(0, 0, 0,0.0)20%, rgba(0, 0, 0,1));
+        border: 1px solid rgba(255, 255, 255,0.1);
+        .atterbut {
+            width: 96%;
+            padding: 10px 20px;
+            margin-left: 0;
+        }
+        .headsmall {
+            font-size: 12px;
+        }
+        h6 {
+            font-size: 18px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        p {
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: rgb(189, 189, 189);
+        }
+        small {
+            font-size: 12px;
+            color: rgb(121, 121, 121);
+        }
+    }
+}
+
+.newsLg:hover img {
+    scale: 1.2;
+}
+
+.newsVid {
+    width: 100%;
+    transition: .3s;
+    cursor: pointer;
+    @media (max-width: 767px) {
+        display: flex;
+        gap: 10px;
+    }
+    .video {
+        flex: 1;
+        width: 100%;
+        height: 160px;
+        position: relative;
+        @media (max-width: 767px) {
+            height: 130px;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255,0.2);
+        }
+        i {
+            position: absolute;
+            top: 30%;
+            left: 43%;
+            font-size: 32px;
+        }
+    }
+    .title {
+        flex: 3;
+        padding: 0 2px;
+        @media (max-width: 767px) {
+            padding: 3px 0;
+        }
+        .headsmall {
+            font-size: 12px;
+        }
+        h6 {
+            font-size: 18px;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        p {
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: rgb(177, 177, 177);
+
+        }
+        small {
+            font-size: 12px;
+            color: rgb(88, 88, 88);
+        }
+    }
+}
+
+.newsVid:hover {
+    scale: 1.03;
+}
