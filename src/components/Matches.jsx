@@ -7,6 +7,15 @@ export default function Matches(props) {
   const [Lteam, setLteam] = useState({})
   const [League, setLeague] = useState([])
   const [Loding, setLoding] = useState(0)
+
+  const date = new Date(props.game.date)
+  
+  const monthNames = ["January", "Feb", "Mar", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const dateName = date.getDate() + ' ' + monthNames[date.getMonth()];
+
   useEffect(() =>{
     API.get(`league`)
     .then(response =>{
@@ -48,7 +57,7 @@ export default function Matches(props) {
       <div className="date">
         <small>Champions League</small>
         <b>{props.game.time}</b>
-        <small>{props.game.date}</small>
+        <small>{dateName}</small>
       </div>
       <div className="right">
         <img src={Lteam.img} alt="" />

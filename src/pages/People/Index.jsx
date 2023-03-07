@@ -5,6 +5,7 @@ import Dashboard from './Dashboard';
 import Bonos from './Bonos';
 import API from '../../components/tools/Api'
 import { useEffect } from 'react';
+import Betting from './Betting';
 
 export function editUser() {
     return (
@@ -71,6 +72,9 @@ export default function Index() {
                 break;
             case 'Dashboard':
                 setMain(<Dashboard />)
+                break;
+            case 'Betting':
+                setMain(<Betting />)
                 break;
 
             default:

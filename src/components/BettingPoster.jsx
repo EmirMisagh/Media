@@ -7,6 +7,15 @@ export default function BettingPoster(props) {
   const [Lteam, setLteam] = useState({})
   const [League, setLeague] = useState([])
   const [Loding, setLoding] = useState(0)
+
+  const date = new Date(props.game.date)
+  
+  const monthNames = ["January", "Feb", "Mar", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const d = date.getDate() + ' ' + monthNames[date.getMonth()];
+
   useEffect(() =>{
     API.get(`league/${props.game.league}`)
     .then(response =>{
@@ -24,6 +33,7 @@ export default function BettingPoster(props) {
       
         setLoding(1)
       }, 2000);
+
   },[])
 
   return (
@@ -42,8 +52,8 @@ export default function BettingPoster(props) {
         </div>
         <div className="time">
             <small>{League.name}</small>
-            <b>12:30</b>
-            <small>12 dec</small>
+            <b>{props.game.time}</b>
+            <small>{d}</small>
         </div>
         <div className="right">
             <img src={Lteam.img} alt="" />
