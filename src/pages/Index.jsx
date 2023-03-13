@@ -113,12 +113,12 @@ export default function Index() {
 
             </Swiper>
             <div className="gridnews p-0 mt-3">
-            {News.map((newes, i) => {
-            if (i < 1)
-                return (
-                   <NewsSm key={i} news={newes} />
-                )
-          })}
+              {News.map((newes, i) => {
+                if (i < 1)
+                  return (
+                    <NewsSm key={i} news={newes} />
+                  )
+              })}
               {/* <NewsSm /> */}
               <NewsVid />
               <NewsVid />
@@ -126,9 +126,9 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className="row mt-5">
+        <div className="row mt-5 main__titr">
           <h5>
-          Suggested News
+            Suggested News
           </h5>
         </div>
         <div className="row  main__swiperStiker mt-1">
@@ -150,22 +150,29 @@ export default function Index() {
             })}
           </Swiper>
         </div>
-        <div className="row mt-5">
-          <h5>
-          Suggested News
-          </h5>
+        <div className="row mt-5 main__titr">
+          <div className="col-11">
+            <h5>
+              Suggested News
+            </h5>
+          </div>
+          <div className="col-1 more">
+            <h5 className='more'>
+              more
+            </h5>
+          </div>
         </div>
         <div className="row main__newsgrid mt-1">
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
-            if (i < 4)
+              if (i < 4)
                 return (
                   <NavLink to={`/news/${newes._id}`} key={i}>
 
-                   <NewsSm  news={newes} />
+                    <NewsSm news={newes} />
                   </NavLink>
                 )
-          })}
+            })}
             {/* <NewsSm />
             <NewsVid />
             <NewsSm />
@@ -174,22 +181,22 @@ export default function Index() {
           <div className="newsgrid g-5-5 col-12">
             {News.map((newes, i) => {
               if (i < 2)
-                return (
-                  <div key={i}>
+                  return (
+                    <div key={i}>
 
-                    <NewsLg newsprops={newes} />
-                  </div>
+                      <NewsLg newsprops={newes} />
+                    </div>
 
-                )
+                  )
             })}
           </div>
           <div className="newsgrid g-3-3-2-2 col-12">
-          {News.map((newes, i) => {
-            if (i > 4 && i < 9)
+            {News.map((newes, i) => {
+              if (i > 4 && i < 9)
                 return (
-                   <NewsSm key={i} news={newes} />
+                  <NewsSm key={i} news={newes} />
                 )
-          })}
+            })}
             {/* <NewsSm />
             <NewsVid />
             <NewsSm />
@@ -197,21 +204,29 @@ export default function Index() {
           </div>
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
-            if (i < 4)
+              if (i < 4)
                 return (
-                   <NewsSm key={i} news={newes} />
+                  <NewsSm key={i} news={newes} />
                 )
-          })}
+            })}
             {/* <NewsSm />
             <NewsVid />
             <NewsSm />
             <NewsVid /> */}
           </div>
         </div>
-        <div className="row mt-5">
-          <h5>
-          Suggested Games
-          </h5>
+        <div className="row mt-5 main__titr">
+          <div className="col-11">
+            <h5>
+              Suggested Games
+            </h5>
+          </div>
+          <div className="col-1 more">
+
+            <h5 className='more'>
+              more
+            </h5>
+          </div>
         </div>
         <div className="row main__bettingposter mt-1">
           <div className="newsgrid g-3-4-3 col-12">
@@ -257,9 +272,9 @@ export default function Index() {
             })}
           </div>
         </div>
-        <div className="row mt-5">
+        <div className="row mt-5 main__titr">
           <h5>
-          VS Lives
+            VS Lives
           </h5>
         </div>
         <div className="row mt-1 main__containervideo">

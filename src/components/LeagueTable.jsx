@@ -1,17 +1,31 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import API from './tools/Api'
 
-export default function LeagueTable() {
+export default function LeagueTable(props) {
     const [Team, setTeam] = useState([])
+    const [League, setLeague] = useState([])
+
+    const { id } = useParams()
 
     useEffect(() => {
-
         API.get(`team`)
             .then(res => {
                 setTeam(res.data.data)
             })
-    }, [])
+            API.get(`league/${id}`)
+            .then(res =>{
+              setLeague(res.data.data.table.sort(function (a, b) {
+                return a.number - b.number;
+            }))
+            })
+    },[])
+
+    const TeamName = (id) =>{
+        let tem = Team.find(i => i._id == id)
+        return tem.name
+    }
 
     const more = () => {
         const table = document.querySelector('.team');
@@ -35,56 +49,20 @@ export default function LeagueTable() {
                         </tr>
                     </thead>
                     <tbody>
-                      
-                        {Team.map((team, i) => {
-                            return (
+                        {League.map((team, i) =>{
+                            return(
                                 <tr>
-                                    <td>{i + 1}</td>
-                                    <td id='name'>{team.name}</td>
-                                    <td>59</td>
-                                    <td>59</td>
-                                    <td>59</td>
-                                    <td>59</td>
-                                    <td>59</td>
-                                </tr>
+                                <td>{team.number}</td>
+                                <td id='name'>{TeamName(team.id)}</td>
+                                <td>59</td>
+                                <td>59</td>
+                                <td>59</td>
+                                <td>59</td>
+                                <td>59</td>
+                            </tr>
                             )
                         })}
-                        <tr>
-                            <td>2</td>
-                            <td id='name'></td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                            <td>59</td>
-                        </tr>
+                      
                     </tbody>
                 </table>
 

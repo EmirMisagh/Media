@@ -1,55 +1,73 @@
 import React, { useEffect, useState } from 'react'
 import API from './tools/Api'
+import { NavLink } from 'react-router-dom'
 
 export default function Notif() {
     const [Team, setTeam] = useState([])
     const [Fteam, setFteam] = useState({})
     const [Lteam, setLteam] = useState({})
-    const [Style, setStyle] = useState('')
-    const [Game, setGame] = useState({ _id: "" })
+    const [Style, setStyle] = useState({})
+    const [Game, setGame] = useState([])
     const [Time, setTime] = useState(0)
+
+    // useEffect(() => {
+       
+    // }, [])
 
     useEffect(() => {
         const i = document.body.offsetHeight;
         API.get('team')
-        .then(response => {
-            setTeam(response.data.data)
-        })
-    }, [])
-
-    useEffect(() => {
-        if (Game._id == "") {
+            .then(response => {
+                setTeam(response.data.data)
+            })
+        if (Game == []) {
             API.get('match/live')
                 .then(response => {
                     setGame(response.data.data)
-                    setTime(response.data.time)
+                    console.log(response.data.data)
                 })
         }
-        if (Game._id != "") {
+        if (Game != []) {
             API.get('match/live')
                 .then(response => {
                     setGame(response.data.data)
-                    setTime(response.data.time)
+                })
 
-                })
-                API.get(`team/${Game.fristteam}`)
-                .then(response =>{
-                  setFteam(response.data.data)
-                })
-              API.get(`team/${Game.lastteam}`)
-                .then(response =>{
-                  setLteam(response.data.data)
-                })
         }
-
+        // if(window.location.href == "http://localhost:5000/football/match/6408448bf8fa4629b03be55f")
+        // setStyle({
+        //     display: 'none'
+        // })
+        // else
+        // setStyle({
+        //     display: 'block'
+        // })
 
     })
 
+    const teamImg = (id) => {
+        let team = Team.find(i => i._id == id)
+        return team.img;
+    }
+
+    const teamName = (id) => {
+        let team = Team.find(i => i._id == id)
+        let name = ''
+        name = team.name.split('')
+        name = name.splice(0, 10)
+        name = name.join('');
+
+        // console.log(name)
+        return name;
+    }
+
     const time = (e) => {
         if (e >= 45 && e <= 60) {
-            return  45
-        } else if (e > 60 )
+            return 45
+        } else if (e > 60 && e < 105)
             return 'H2 ' + (e - 15)
+        else if (e >= 105)
+            return 'H2 +90'
         else
             return 'H1 ' + e
     }
@@ -61,35 +79,40 @@ export default function Notif() {
     // }
     return (
         <div className='container-fluid notifmain'>
-            {Game._id != "" ? (
-
-
-                <div className="notif ">
-                    <div className="row">
-                        <div className="col-4 fteam">
-                            <div className="back"></div>
-                            <img src={Fteam.img} alt="" />
-                        </div>
-                        <div className="col-4 live">
-                            <button className={`live`}>LIVE</button>
-                        </div>
-                        <div className="col-4 lteam">
-                            <div className="back"></div>
-                            <img src={Lteam.img} alt="" />
-                        </div>
-                    </div>
-                    <div className="row ">
-                        <div className="col-4">
-                            {Fteam.name}
-                        </div>
-                        <div className="col-4">
-                             {time(Time)} : 00
-                        </div>
-                        <div className="col-4">
-                        {Lteam.name}
-                        </div>
-                    </div>
-                </div>
+            {Game != [] ? (
+                Game.map((item, i) => {
+                    if (i < 2)
+                        return (
+                            <NavLink key={i} to={`/football/match/${item._id}`}>
+                            <div className="notif" key={i} style={Style}>
+                                <div className="row">
+                                    <div className="col-4 fteam">
+                                        <div className="back"></div>
+                                        <img src={teamImg(item.fristteam)} alt="" />
+                                    </div>
+                                    <div className="col-4 live">
+                                        <button className={`live`}>LIVE</button>
+                                    </div>
+                                    <div className="col-4 lteam">
+                                        <div className="back"></div>
+                                        <img src={teamImg(item.lastteam)} alt="" />
+                                    </div>
+                                </div>
+                                <div className="row ">
+                                    <div className="col-4">
+                                        {teamName(item.fristteam)}
+                                    </div>
+                                    <div className="col-4">
+                                        {time(item.__v)} : 00
+                                    </div>
+                                    <div className="col-4">
+                                        {teamName(item.lastteam)}
+                                    </div>
+                                </div>
+                            </div>
+                            </NavLink>
+                        )
+                })
             ) : (
                 ""
             )}

@@ -17,6 +17,8 @@ export default function Header() {
     const [Admin, setAdmin] = useState('');
     const [Menuon, setMenuon] = useState(0);
     const [Result, setResult] = useState([]);
+    const [Teams, setTeams] = useState([]);
+    const [Leagues, setLeagues] = useState([]);
     const [Menuclass, setMenuclass] = useState({
         menu: 'menuoff',
         saye: 'sayeoff'
@@ -24,6 +26,17 @@ export default function Header() {
     const [SlidResult, setSlidResult] = useState(3);
 
     useEffect(() => {
+
+        API.get('team')
+            .then(response => {
+                setTeams(response.data.data)
+                console.log(response.data.data)
+            })
+        API.get('league')
+            .then(response => {
+                setLeagues(response.data.data)
+                console.log(response.data.data)
+            })
         setToken(localStorage.getItem('token'));
         setAdmin(localStorage.getItem('admin'));
 
@@ -128,25 +141,60 @@ export default function Header() {
                                 <NavLink id='index' to='/football/New Results' >Soccer</NavLink>
                                 <div className="Footballdiv">
                                     <ul>
+                                        <li>Results</li>
+                                        {Leagues.map((league, i) => {
+                                            if (league.navbar == true)
+                                                return (
+                                                    <li>
+                                                        <NavLink to='/football/league/63e929b97625b40834846b81'>
+                                                            {league.name} <br />
+                                                            <small>
+                                                                Standings |
+                                                                Schedule
+                                                            </small>
+                                                        </NavLink>
+                                                    </li>
 
+                                                )
+                                        })}
                                         {/* <li>
-                             <NavLink id='Pageone' to='/football' onClick={(e) =>props.nav(e)}>
-                                    FIFA World Cup
-                            </NavLink> 
-                                </li> */}
+                                            <NavLink to='/football/league/63e929b97625b40834846b81'>
+                                                Champions League <br />
+                                                <small>
+                                                    Standings |
+                                                    Schedule
+                                                </small>
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            Europa League <br />
+                                            <small>
+                                                Standings |
+                                                Schedule
+                                            </small>
+                                        </li>
+                                        <li>
+                                            <NavLink to='/football/league/6409db479b3c1e20acc86d6d'>
+                                                Transfers Market <br />
+                                                <small>
+                                                    Standings |
+                                                    Schedule
+                                                </small>
+                                            </NavLink>
+                                        </li> */}
                                     </ul>
                                     <ul>
                                         <li>
-                                            Concacaf Champions League <br />
+                                            Euro Best Player <br />
                                             <small>
                                                 Schedule
                                             </small>
                                         </li>
                                         <li>
-                                            Mexican League <br />
+                                            Ranking <br />
                                             <small>
-                                                Apertura Standings |
-                                                Apertura Schedule |
+                                                League Ranking |
+                                                Team Ranking |
                                                 Clausura Standings |
                                                 Clausura Schedule
                                             </small>
@@ -154,51 +202,63 @@ export default function Header() {
                                         <li className='b-0'>
                                             European Soccer <br />
                                             <small>
-                                                <NavLink to='/football/league/63e91558346342fff189b49b'>
-                                                    LaLiga |
-                                                </NavLink>
-                                                Copa del Rey |
-                                                <NavLink to='/football/league/63b832346053e0090f4337e2'>
-                                                    Premier League |
-                                                </NavLink>
-                                                Serie A |
-                                                <NavLink to='/football/league/63e91510346342fff189b494'>
-                                                    Bundesliga |
-                                                </NavLink>
-                                                Ligue1 |
-                                                <NavLink to='/football/league/63e929b97625b40834846b81'>
-                                                    Champions League |
-                                                </NavLink>
-                                                Europa League |
+                                                {Leagues.map((league, i) => {
+                                                    if (i < 7)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
                                             </small>
+
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            Latin American Soccer <br />
+                                            Euro Team Soccer <br />
                                             <small>
-                                                Chilean Primera División |
-                                                Argentina Liga Profesional |
-                                                Colombian Liga BetPlay |
-                                                Peruvian Primera División |
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
                                             </small>
 
                                         </li>
-                                        <li>
-                                            Libertadores <br />
+                                        <li className='b-0'>
+                                            Other League Soccer <br />
                                             <small>
-                                                Standings |
-                                                Schedule
+                                                {Leagues.map((league, i) => {
+                                                    if (i < 4)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
 
                                             </small>
-                                        </li>
-                                        <li>
-                                            Gold Cup
+
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            Motor <br />
+                                            France Football <br />
                                             <small>
                                                 Formula 1
                                                 MotoGP
@@ -207,21 +267,22 @@ export default function Header() {
                                             </small>
                                         </li>
                                         <li>
-                                            Tennis <br />
+                                            Other Team Soccer <br />
                                             <small>
-                                                Australian Open
-                                                US Open
-                                                Wimbledon
-                                                Roland Garros
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
                                             </small>
-                                        </li>
-                                        <li>
-                                            Cycling <br />
-                                            <small>
-                                                Tour de France
-                                                Giro Italia
-                                                Vuelta a España
-                                            </small>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -461,7 +522,7 @@ export default function Header() {
                                         Premier
                                     </div>
                                     {Result.map((match, i) => {
-                                        if (i > 3 && i < 8)
+                                        if (i > 5 && i < 9)
                                             return (
                                                 <div key={i}>
                                                     <ResultHeader game={match} />

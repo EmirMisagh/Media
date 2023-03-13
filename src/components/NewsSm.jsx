@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { LodingNews, LodingCom } from './Loding'
-import { AiFillInstagram,AiFillTwitterCircle,AiFillLinkedin,AiOutlineSearch,AiOutlineMenu } from "react-icons/ai";
+import { LodingCom } from './Loding'
+import { AiFillInstagram } from "react-icons/ai";
 
 
 export default function NewsSm(props) {
   const [Loding, setLoding] = useState(0)
+
+  const date = new Date(props.news.date)
+
   useEffect(() => {
 
     setTimeout(() => {
@@ -12,6 +15,16 @@ export default function NewsSm(props) {
       setLoding(1)
     }, 2000);
   }, [])
+
+  const cutString = (string) => {
+    let name = string
+    name = name.split(' ')
+    name = name.splice(0, 14)
+    name = name.join(' ');
+
+    return name + "...";
+}
+
   return (
     <>
       {Loding == 0 ? (
@@ -44,8 +57,8 @@ export default function NewsSm(props) {
           <div className="title">
             <small className="headsmall">{props.news.title}</small>
             <h6 className="">{props.news.head}</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditat</p>
-            <small className="date">12/5/2023</small>
+            <p>{cutString(props.news.Description)}</p>
+            <small className="date">{date.getFullYear()}/{date.getMonth()}/{date.getDay()}</small>
           </div>
         </div>
       )}

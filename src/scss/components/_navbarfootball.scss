@@ -28,7 +28,7 @@
         display: flex;
         gap: 20px;
         @media (max-width: 865px) {
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr ;
         }
 
         li {
@@ -44,5 +44,15 @@
             color: #fff;
             border-bottom: 1px solid red;
         }
+    }
+    select {
+        font-family: 'Rokkitt', serif;
+        padding: 0px 10px;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: 0;
+        background-color: rgb(14, 14, 14);
+        color: aliceblue;
     }
 }

@@ -37,7 +37,7 @@ export default function League() {
                    <NewsSm key={i} news={newes} />
                 )
           })}
-          <LeagueTable />
+          <LeagueTable table={League} />
             {/* <NewsSm />
             <NewsVid />
             <NewsSm />

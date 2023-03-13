@@ -165,4 +165,14 @@
             }
         }
     }
+
+    &__titr {
+        .more {
+            text-align: right;
+            cursor: pointer;
+        }
+        .more:hover{
+            color: aliceblue;
+        }
+    }
 }
