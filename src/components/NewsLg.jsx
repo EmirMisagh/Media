@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LodingNews } from './Loding'
-import { AiFillInstagram,AiFillTwitterCircle,AiFillLinkedin,AiOutlineSearch,AiOutlineMenu } from "react-icons/ai";
+import { AiFillInstagram } from "react-icons/ai";
 
 
 export default function NewsLg(props) {
@@ -25,12 +25,12 @@ export default function NewsLg(props) {
 
   return (
     <>
-      {Loding == 0 ? (
+      {Loding === 0 ? (
         <LodingNews />
       ) : (
         <div className='newsLg'>
           <div className="img">
-            {props.newsprops.video == true ? (
+            {props.newsprops.video === true ? (
               <>
                 <div className="video">
                   <video  width="100%" height="100%">

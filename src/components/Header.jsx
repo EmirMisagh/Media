@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BsFacebook, BsChevronCompactRight } from "react-icons/bs";
+import { BsFacebook } from "react-icons/bs";
 import { AiFillInstagram, AiFillTwitterCircle, AiFillLinkedin, AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
-import { Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
+import { Autoplay, Navigation, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,6 +11,8 @@ import 'swiper/css/scrollbar';
 import Menu from './Menu';
 import API from './tools/Api';
 import ResultHeader from './ResultHeader';
+import { BsChevronCompactDown } from "react-icons/bs";
+
 
 export default function Header() {
     const [Token, setToken] = useState('');
@@ -26,19 +28,17 @@ export default function Header() {
     const [SlidResult, setSlidResult] = useState(3);
 
     useEffect(() => {
-
+        setToken(localStorage.getItem('token'));
+        setAdmin(localStorage.getItem('admin'));
         API.get('team')
             .then(response => {
                 setTeams(response.data.data)
-                console.log(response.data.data)
             })
         API.get('league')
             .then(response => {
                 setLeagues(response.data.data)
-                console.log(response.data.data)
             })
-        setToken(localStorage.getItem('token'));
-        setAdmin(localStorage.getItem('admin'));
+
 
         API.get('match/result/')
             .then(response => {
@@ -54,7 +54,7 @@ export default function Header() {
     }, [])
 
     const MenuHandle = () => {
-        if (Menuon == 0) {
+        if (Menuon === 0) {
             setMenuclass({
                 menu: 'menuon',
                 saye: 'sayeon'
@@ -71,14 +71,17 @@ export default function Header() {
 
     window.onscroll = function () {
         const navbary = document.getElementById('Navbary');
+        const scrol = document.getElementById('scrol');
         if (window.pageYOffset > 70) {
             navbary.style.position = 'fixed';
-            navbary.style.left = '2%';
-            navbary.style.top = '10px';
+            navbary.style.left = '0%';
+            navbary.style.top = '0px';
+            scrol.classList.add('top')
         } else {
             navbary.style.position = 'relative';
             navbary.style.left = '0%';
             navbary.style.top = '0px';
+            scrol.classList.remove('top')
         }
     }
 
@@ -92,11 +95,19 @@ export default function Header() {
         }
     })
 
+    const scrolHandle = () => {
+        if (window.pageYOffset > 70) {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+          window.scrollTo({ top: 870, behavior: 'smooth' })
+        }
+      }
+
     return (
         <>
-            <nav className="navic">
+            <nav className="navic container-fluid p-0">
                 <div className="row navic__top">
-                    <div className="col-6 col-md-3 c1 ">
+                    <div className="col-4 col-sm-6 col-md-3 c1 ">
                         <NavLink to='/'>
                             <h3>
                                 VC
@@ -104,9 +115,98 @@ export default function Header() {
                         </NavLink>
                         <small>VictoryCity</small>
                     </div>
-                    <div className="col-6 c2">
-                        <input type="text" name="" id="" placeholder='Search' />
-                        <button><i><AiOutlineSearch /></i></button>
+                    <div className="col-6 col-md-6 c2">
+                        <div className='p-0 input-search'>
+                            <input type="text" name="" id="" placeholder='Search' />
+                            <div className="searchmenu">
+                                <ul>
+                                    <li>Results</li>
+                                    {Leagues.map((league, i) => {
+                                        return (
+                                            league.navbar === true && (
+
+                                                <li key={i}>
+                                                    <NavLink to={`/football/league/${league._id}`}>
+                                                        {league.name} <br />
+                                                        <small>
+                                                            Standings |
+                                                            Schedule
+                                                        </small>
+                                                    </NavLink>
+                                                </li>
+                                            )
+
+                                        )
+                                    })}
+
+                                </ul>
+                                <ul>
+                                    <li className='b-0'>
+                                        Soccer Leagues  <br />
+                                        <small>
+                                            {Leagues.map((league, i) => {
+                                                if (i < 20)
+                                                    return (
+                                                        <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                            <small key={i}>
+                                                                {" " + league.name} |
+                                                            </small>
+                                                        </NavLink>
+
+                                                    )
+                                            })}
+
+                                        </small>
+
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        Team Soccer <br />
+                                        <small>
+                                            {Teams.map((team, i) => {
+                                                if (i < 25)
+                                                    return (
+                                                        <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                            <small key={i}>
+                                                                {" " + team.name} |
+                                                            </small>
+                                                        </NavLink>
+
+                                                    )
+                                            })}
+
+                                        </small>
+
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        Matches <br />
+                                        <small>
+                                            {Teams.map((team, i) => {
+                                                if (i < 15)
+                                                    return (
+                                                        <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                            <small key={i}>
+                                                                {" " + team.name} |
+                                                            </small>
+                                                        </NavLink>
+
+                                                    )
+                                            })}
+
+                                        </small>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button>
+                            <NavLink to='/search'>
+                                <i><AiOutlineSearch /></i>
+                            </NavLink>
+                        </button>
                     </div>
                     <div className="col-0 col-md-3 c3">
                         {Token == undefined ? (
@@ -136,17 +236,18 @@ export default function Header() {
                 </div>
                 <div className="navic__bottom row">
                     <div className="Navbary row" id='Navbary'>
-                        <div className="col-11 col-md-6 c1">
+                        <div className="col-8 col-md-6 c1">
                             <li className='Football' id="nav-foul">
                                 <NavLink id='index' to='/football/New Results' >Soccer</NavLink>
                                 <div className="Footballdiv">
                                     <ul>
                                         <li>Results</li>
                                         {Leagues.map((league, i) => {
-                                            if (league.navbar == true)
-                                                return (
-                                                    <li>
-                                                        <NavLink to='/football/league/63e929b97625b40834846b81'>
+                                            return (
+                                                league.navbar === true && (
+
+                                                    <li key={i}>
+                                                        <NavLink to={`/football/league/${league._id}`}>
                                                             {league.name} <br />
                                                             <small>
                                                                 Standings |
@@ -154,34 +255,11 @@ export default function Header() {
                                                             </small>
                                                         </NavLink>
                                                     </li>
-
                                                 )
+
+                                            )
                                         })}
-                                        {/* <li>
-                                            <NavLink to='/football/league/63e929b97625b40834846b81'>
-                                                Champions League <br />
-                                                <small>
-                                                    Standings |
-                                                    Schedule
-                                                </small>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            Europa League <br />
-                                            <small>
-                                                Standings |
-                                                Schedule
-                                            </small>
-                                        </li>
-                                        <li>
-                                            <NavLink to='/football/league/6409db479b3c1e20acc86d6d'>
-                                                Transfers Market <br />
-                                                <small>
-                                                    Standings |
-                                                    Schedule
-                                                </small>
-                                            </NavLink>
-                                        </li> */}
+
                                     </ul>
                                     <ul>
                                         <li>
@@ -205,7 +283,7 @@ export default function Header() {
                                                 {Leagues.map((league, i) => {
                                                     if (i < 7)
                                                         return (
-                                                            <NavLink to={`/football/league/${league._id}`} >
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
                                                                 <small key={i}>
                                                                     {" " + league.name} |
                                                                 </small>
@@ -225,7 +303,7 @@ export default function Header() {
                                                 {Teams.map((team, i) => {
                                                     if (i < 15)
                                                         return (
-                                                            <NavLink to={`/football/team/${team._id}`} >
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
                                                                 <small key={i}>
                                                                     {" " + team.name} |
                                                                 </small>
@@ -243,7 +321,7 @@ export default function Header() {
                                                 {Leagues.map((league, i) => {
                                                     if (i < 4)
                                                         return (
-                                                            <NavLink to={`/football/league/${league._id}`} >
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
                                                                 <small key={i}>
                                                                     {" " + league.name} |
                                                                 </small>
@@ -272,7 +350,7 @@ export default function Header() {
                                                 {Teams.map((team, i) => {
                                                     if (i < 15)
                                                         return (
-                                                            <NavLink to={`/football/team/${team._id}`} >
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
                                                                 <small key={i}>
                                                                     {" " + team.name} |
                                                                 </small>
@@ -424,7 +502,7 @@ export default function Header() {
                             <li className='Betting' id="nav-foul">
                                 <NavLink to='#'>Betting</NavLink>
                             </li>
-                            {Token == undefined ? (
+                            {Token === undefined ? (
                                 <>
                                     <li className='Login' id="btn-login">
                                         <NavLink to='/login'>Login</NavLink>
@@ -435,11 +513,11 @@ export default function Header() {
                                 </>
                             ) : (
                                 <li className='Login' id="btn-login">
-                                    <NavLink to='/login'>Dasbourd</NavLink>
+                                    <NavLink to='/people'>Dasbourd</NavLink>
                                 </li>
                             )}
                         </div>
-                        <div className="col-1 col-md-6 c3">
+                        <div className="col-4 col-md-6 c3">
                             <li>
                                 <a href='http://instgram/'>
                                     <i>
@@ -548,6 +626,13 @@ export default function Header() {
                                 </div>
                             </SwiperSlide>
                         </Swiper>
+                    </div>
+                </div>
+                <div className="navic__scrol">
+                    <div className="bottom" id='scrol' onClick={scrolHandle}>
+                        <i>
+                            <BsChevronCompactDown />
+                        </i>
                     </div>
                 </div>
                 <Menu class={Menuclass} handle={MenuHandle} />

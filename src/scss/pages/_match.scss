@@ -1,3 +1,12 @@
+.mainmatch {
+    video {
+        opacity: 0.5;
+        transition: .5s;
+    }
+    video:hover {
+        opacity: 1;
+    }
+}
 .matchbetting {
     margin: 0;
     padding: 0 15px;

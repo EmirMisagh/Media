@@ -2,7 +2,8 @@
     position: fixed;
     right: 10px;
     bottom: 10px;
-    width: 400px;
+    min-width: 200px;
+    max-width: 400px;
     padding: 10px 20px;
     .notif {
         text-align: center;
@@ -63,7 +64,7 @@
                 height: 100%;
                 top: 0;
                 left: 0px;
-                background-color: rgb(212, 0, 0);
+                background-color: rgb(206,0,0);
                 clip-path: polygon(0 1%, 100% 0, 34% 100%, 0% 100%);
                 z-index: -1;
             }
@@ -75,7 +76,7 @@
                 height: 100%;
                 top: 0;
                 right: 0px;
-                background-color: rgb(212, 0, 0);
+                background-color: rgb(206,0,0);
                 clip-path: polygon(0 0, 100% 0%, 100% 100%, 59% 100%);
                 z-index: -1;
             }

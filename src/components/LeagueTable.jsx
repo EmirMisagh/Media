@@ -20,10 +20,10 @@ export default function LeagueTable(props) {
                 return a.number - b.number;
             }))
             })
-    },[])
+    },[id])
 
     const TeamName = (id) =>{
-        let tem = Team.find(i => i._id == id)
+        let tem = Team.find(i => i._id === id)
         return tem.name
     }
 
@@ -55,7 +55,7 @@ export default function LeagueTable(props) {
                                 <td>{team.number}</td>
                                 <td id='name'>{TeamName(team.id)}</td>
                                 <td>59</td>
-                                <td>59</td>
+                                <td>{team.game}</td>
                                 <td>59</td>
                                 <td>59</td>
                                 <td>59</td>

@@ -3,6 +3,7 @@ import React, { Suspense, lazy, useEffect, useState, useMemo } from 'react';
 import Header from '../Header';
 import NavbarFootball from '../NavbarFootball';
 import Footer from '../Footer';
+import Search from '../../pages/Search';
 
 
 
@@ -84,6 +85,10 @@ const routes = [
     {
         path: "/signin",
         element: <Sign />
+    },
+    {
+        path: "/search",
+        element: <Search />
     },
     {
         path: "/football/matches",

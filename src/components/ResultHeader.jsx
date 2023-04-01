@@ -22,22 +22,22 @@ export default function ResultHeader(props) {
 
   }, [])
   return (
-    <li className='resul'>
-      <NavLink to={`/football/team/${Fteam._id}`}>
-        <small>
+    <div className='resul'>
+      <small className=''>
+        <NavLink to={`/football/team/${Fteam._id}`}>
 
           <img src={Fteam.img} alt="" />
           <b className='pt-5'>{Fteam.nickname}</b>
           <i>{props.game.fristresult}</i>
-        </small>
-      </NavLink>
-      <NavLink to={`/football/team/${Lteam._id}`}>
-        <small>
+        </NavLink>
+      </small>
+      <small>
+        <NavLink to={`/football/team/${Lteam._id}`}>
           <img src={Lteam.img} alt="" />
           <b className='pt-5'>{Lteam.nickname}</b>
           <i>{props.game.lastresult}</i>
-        </small>
-      </NavLink>
-    </li>
+        </NavLink>
+      </small>
+    </div>
   )
 }

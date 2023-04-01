@@ -56,11 +56,15 @@ export default function Index() {
     }
   })
 
+ 
+
+ 
+
   return (
     <>
       <div className='container mt-5 main'>
         <div className="row main__head">
-          <div className="col-12 col-xl-4 ">
+          <div className="col-12 col-xl-4 order-2 order-xl-1">
             <h5>Weeks Match</h5>
             <div className="mainmatch mt-4" style={{ backgroundImage: `url(${Tools.bg_match})` }}>
               {MatchesApi.map((match, i) => {
@@ -81,7 +85,7 @@ export default function Index() {
               </h6>
             </div>
           </div>
-          <div className="col-12 col-xl-8">
+          <div className="col-12 col-xl-8 order-1 order-xl-2">
             <h5>Weeks News</h5>
             <Swiper
               className='swiper mt-4'
@@ -106,7 +110,9 @@ export default function Index() {
                   else
                     return (
                       <SwiperSlide key={i}>
-                        <NewsLg newsprops={newes} />
+                        <NavLink to={`/news/${newes._id}`}>
+                          <NewsLg newsprops={newes} />
+                        </NavLink>
                       </SwiperSlide>
                     )
               })}
@@ -151,13 +157,13 @@ export default function Index() {
           </Swiper>
         </div>
         <div className="row mt-5 main__titr">
-          <div className="col-11">
+          <div className="col-8">
             <h5>
               Suggested News
             </h5>
           </div>
-          <div className="col-1 more">
-            <h5 className='more'>
+          <div className="col-4 more">
+            <h5 className='more '>
               more
             </h5>
           </div>
@@ -173,55 +179,49 @@ export default function Index() {
                   </NavLink>
                 )
             })}
-            {/* <NewsSm />
-            <NewsVid />
-            <NewsSm />
-            <NewsVid /> */}
           </div>
           <div className="newsgrid g-5-5 col-12">
             {News.map((newes, i) => {
               if (i < 2)
-                  return (
-                    <div key={i}>
-
+                return (
+                  <div key={i}>
+                    <NavLink to={`/news/${newes._id}`} key={i}>
                       <NewsLg newsprops={newes} />
-                    </div>
-
-                  )
+                    </NavLink>
+                  </div>
+                )
             })}
           </div>
           <div className="newsgrid g-3-3-2-2 col-12">
             {News.map((newes, i) => {
               if (i > 4 && i < 9)
                 return (
-                  <NewsSm key={i} news={newes} />
+                  <NavLink to={`/news/${newes._id}`} key={i}>
+
+                    <NewsSm news={newes} />
+                  </NavLink>
                 )
             })}
-            {/* <NewsSm />
-            <NewsVid />
-            <NewsSm />
-            <NewsVid /> */}
           </div>
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
               if (i < 4)
                 return (
-                  <NewsSm key={i} news={newes} />
+                  <NavLink to={`/news/${newes._id}`} key={i}>
+
+                    <NewsSm news={newes} />
+                  </NavLink>
                 )
             })}
-            {/* <NewsSm />
-            <NewsVid />
-            <NewsSm />
-            <NewsVid /> */}
           </div>
         </div>
         <div className="row mt-5 main__titr">
-          <div className="col-11">
+          <div className="col-8">
             <h5>
               Suggested Games
             </h5>
           </div>
-          <div className="col-1 more">
+          <div className="col-4 more">
 
             <h5 className='more'>
               more
@@ -273,9 +273,16 @@ export default function Index() {
           </div>
         </div>
         <div className="row mt-5 main__titr">
-          <h5>
-            VS Lives
-          </h5>
+          <div className="col-8">
+            <h5>
+              VS Lives
+            </h5>
+          </div>
+          <div className="col-4 more">
+            <h5 className='more'>
+              more
+            </h5>
+          </div>
         </div>
         <div className="row mt-1 main__containervideo">
           <div className="row mainvideo">
@@ -344,6 +351,7 @@ export default function Index() {
           </div>
 
         </div>
+       
       </div>
     </>
   )

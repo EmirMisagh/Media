@@ -92,7 +92,11 @@ export default function Dashboard(props) {
       <div className="matchgrid-people">
         {Matchs.map((match, i) =>{
           return(
+            <>
             <Matches key={i} game={match} />
+            <div></div>
+            <Matches key={i} game={match} />
+            </>
           )
         })}
         {/* <NavLink to='/football/match'>

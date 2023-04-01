@@ -19,7 +19,7 @@ export default function NewsSm(props) {
   const cutString = (string) => {
     let name = string
     name = name.split(' ')
-    name = name.splice(0, 14)
+    name = name.splice(0, 11)
     name = name.join(' ');
 
     return name + "...";
@@ -27,12 +27,12 @@ export default function NewsSm(props) {
 
   return (
     <>
-      {Loding == 0 ? (
+      {Loding === 0 ? (
         <LodingCom />
       ) : (
         <div className='newsSm'>
           <div className="img">
-            {props.news.video == true ? (
+            {props.news.video === true ? (
               <>
                 <div className="video">
                   <video controls width="100%" height="100%">

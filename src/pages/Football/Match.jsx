@@ -12,6 +12,8 @@ export default function Match() {
     const [People, setPeople] = useState('')
     const [Match, setMatch] = useState('')
     const [Team, setTeam] = useState('first')
+    const [FTeam, setFTeam] = useState({})
+    const [LTeam, setLTeam] = useState({})
     const [TeamList, setTeamList] = useState([])
     const [Bonos, setBonos] = useState(30)
     const [Iduser, setIduser] = useState('')
@@ -31,11 +33,26 @@ export default function Match() {
 
     useEffect(() => {
         const idUser = localStorage.getItem('token')
+        API.get(`match/${id}`)
+        .then(response => {
+            setMatch(response.data.data)
+            API.get(`team/${response.data.data.fristteam}`)
+            .then(response => {
+                setFTeam(response.data.data)
+                console.log(response.data.data)
+            })
+            API.get(`team/${response.data.data.lastteam}`)
+            .then(response => {
+                setLTeam(response.data.data)
+                console.log(response.data.data)
+            })
+        })
         API.get(`team`)
             .then(response => {
                 setTeamList(response.data.data)
-                console.log(response.data.data)
             })
+      
+
 
         if (idUser != null) {
             API.get(`users/token/${idUser}`)
@@ -55,12 +72,9 @@ export default function Match() {
         //     })
         // }
         // console.log(People)
-        API.get(`match/${id}`)
-            .then(response => {
-                setMatch(response.data.data)
-            })
+      
 
-    }, [])
+    }, [FTeam, LTeam])
 
     const Close = async () => {
         API.patch(`match/betting/update/${id}`, user)
@@ -115,7 +129,7 @@ export default function Match() {
 
     return (
         <>
-            <div className="row divlogin m-0 p-0">
+            <div className="row divlogin mainmatch m-0 p-0">
                 <div className="col-12 pt-5 px-5 oreder-1">
                     <button onClick={() => { window.history.back() }} className="butt btn btn-outline-light px-4"><AiOutlineArrowLeft /></button>
                 </div>
@@ -174,14 +188,14 @@ export default function Match() {
                             </h2>
                             <div className="title">
                                 <div className="left">
-                                    <p>Real Madrid</p>
+                                    <p>{FTeam.name}</p>
                                     <p>Lorem ipsum dolor sit amet consectetur .</p>
                                     <label htmlFor="">Bonos</label>
                                     <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelF} step={5} min={0} max={People.status} type="number" name="" id="" />
 
                                 </div>
                                 <div className="right">
-                                    <img src="{teamImg(Match.fristteam)}" alt="" />
+                                    <img src={FTeam.img} alt="" />
                                     <button type='button' disabled={DisibelF} onClick={Close} className="btn btn-outline-light px-4 mt-4">
                                         Close
                                     </button>
@@ -197,14 +211,14 @@ export default function Match() {
                             </h2>
                             <div className="title">
                                 <div className="left">
-                                    <p>Real Madrid</p>
+                                    <p>{LTeam.name}</p>
                                     <p>Lorem ipsum dolor sit amet consectetur .</p>
                                     <label htmlFor="">Bonos</label>
                                     <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelL} step={5} min={0} max={People.status} type="number" name="" id="" />
 
                                 </div>
                                 <div className="right">
-                                    <img src="{teamImg(Match.lastteam)}" alt="" />
+                                    <img src={LTeam.img} alt="" />
                                     <button type='button' onClick={Close} disabled={DisibelL} className="btn btn-outline-light px-4 mt-4">
                                         Close
                                     </button>

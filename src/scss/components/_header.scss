@@ -1,4 +1,5 @@
 .navic {
+    overflow-x: hidden;
     &__top {
         background-color: rgb(255, 255, 255);
         margin: 0;
@@ -27,6 +28,9 @@
                 font-family: 'Cormorant Garamond', serif;
                 font-family: 'Cinzel', serif;
                 font-weight: 700;
+                @media (max-width: 460px) {
+                    display: none;
+                }
             }
         }
 
@@ -35,24 +39,91 @@
             text-align: center;
             display: flex;
             padding: 11px 25px;
-
-            input {
-                border: 0.1px solid rgb(134, 134, 134);
-                padding: 1px 18px;
-                border-radius: 50px 0px 0px 50px;
-                background: none;
-                min-width: 110px;
-                max-width: 200px;
+            @media (max-width: 465px) {
+                padding: 11px 1px;
             }
+            .input-search {
+                @media (max-width: 465px) {
+                    text-align: right;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: end;
+                }
+                input {
+                    border: 0.1px solid rgb(134, 134, 134);
+                    padding: 1px 18px;
+                    border-radius: 50px 0px 0px 50px;
+                    background: none;
+                    min-width: 20px;
+                    max-width: 200px;
+                    height: 100%;
+                    @media (max-width: 465px) {
+                        margin-left: auto;
+                    }
+                }
+                input:focus + .searchmenu {
+                    display: grid;
+                }
+                .searchmenu {
+                    // display: none;
+                    display: none;
+                    grid-template-columns: 2fr 2fr 2fr 2fr;
+                    position: fixed;
+                    width: 100%;
+                    background-color: rgb(255, 255, 255);
+                    color: #000;
+                    margin-top: 1px;
+                    left: 0;
+                    z-index: 999999;
+                    padding: 15px 0px;
+                    font-family: 'Roboto Condensed', sans-serif;
+                    border-top: 0.5px solid rgb(212, 212, 212);
+                    text-align: left;
+                    @media (max-width: 865px) {
+                        position: fixed;
+                        overflow: hidden;
+                        width: 100vw;
+                        height: 50vh;
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0 25px;
+                        border-left: 0.5px solid rgb(212, 212, 212);
+                    }
 
+                    li:last-child {
+                        border: 0;
+                    }
+
+                    li {
+                        margin: 0;
+                        font-weight: 900;
+                        font-size: 17px;
+                        padding: 10px 0px;
+                        border-bottom: 0.5px solid rgb(212, 212, 212);
+                        color: #000;
+
+                        a {
+                            color: #000;
+                        }
+
+                        small {
+                            font-size: 13px;
+                            color: rgb(85, 85, 85);
+                        }
+                    }
+                }
+            }
+          
             button {
                 border: 0.1px solid rgb(128, 128, 128);
                 padding: 1px 10px;
                 border-radius: 0px 50px 50px 0px;
                 background: none;
                 transition: .4s;
-
+                
                 i {
+                    color: #000;
                     font-weight: bold;
                 }
             }
@@ -61,6 +132,9 @@
                 background-color: black;
                 color: aliceblue;
                 border: 0.1px solid rgb(0, 0, 0);
+            }
+            button:hover i {
+                color: aliceblue;
             }
         }
 
@@ -90,7 +164,7 @@
     &__bottom {
         padding-top: 10px;
         background-color: rgb(22, 32, 32);
-      
+        padding-top: 0px;
         .Navbary {
             background-color: rgb(12, 12, 12);
             margin: 0px auto;
@@ -98,6 +172,14 @@
             padding: 0px 10px;
             border-radius: 30px;
             border: 1px solid rgb(68, 68, 68);
+            transition: .0s;
+            z-index: 9999;
+            background-color: rgb(206,0,0);
+            margin: 0px auto;
+            width: 100%;
+            padding: 1px 10px;
+            border-radius: 0px;
+            border: 0;
             transition: .0s;
             z-index: 9999;
             .c1 {
@@ -214,6 +296,10 @@
                         display: block;
                         font-size: 20px;
                     }
+                    button {
+                        border: 0;
+
+                    }
                 }
 
                 li[id='btn-menu']:hover {
@@ -253,7 +339,7 @@
     }
 
     &__Results {
-        background-color: rgb(22, 32, 32);
+        background-color: rgb(236, 236, 236);
         margin: 0;
         padding: 0px 30px;
 
@@ -273,10 +359,13 @@
 
                     .logo {
                         padding: 10px 15px;
-                        background: linear-gradient(to left, rgb(26, 114, 114)20%, rgb(22, 32, 32));
+                        // background: linear-gradient(to left, rgb(26, 114, 114)20%, rgb(22, 32, 32));
+                        background-color: rgb(212, 212, 212);
                         cursor: pointer;
                         font-family: 'Oswald', sans-serif;
                         letter-spacing: 1px;
+                        font-weight: 700;
+                        color: #000;
                     }
 
                     .logo:hover {
@@ -288,22 +377,25 @@
                         padding: 0 10px;
                         width: 80px;
                         margin: 0 0px;
-                        color: rgb(218, 218, 218);
+                        color: rgb(0, 0, 0);
                         small {
                             cursor: pointer;
                             font-weight: 300;
-                          
+                            width: 100%;
                         }
                         b {
 
                             padding-top: 5px;
-
+                            color: #000;
+                            font-weight: 600;
+                            font-family: 'Oswald', sans-serif;
                         }
 
                         i {
                             margin-left: auto;
                             float: right;
-                            color: rgb(120, 235, 235);
+                            color: rgb(0, 0, 0);
+                            font-weight: 800;
                         }
 
                         img {
@@ -316,6 +408,51 @@
                 }
 
                 .swiper-button-next {}
+            }
+        }
+    }
+
+    &__scrol {
+        position: fixed;
+        width: 10%;
+        font-size: 24px;
+        bottom: 15px;
+        right: 45%;
+        z-index: 999999999;
+        .bottom {
+            text-align: center;
+            transition: .4s all;
+            animation: scrol 0.8s infinite;
+            @keyframes scrol {
+                0% {
+                    padding-bottom: 5px;
+                }
+                50%{
+                    padding-bottom: 0px;
+                }
+                100% {
+                    padding-bottom: 5px;
+                }
+            }
+            i {
+                font-size: 38px;
+                color: aliceblue;
+                cursor: pointer;
+            }
+        }
+        .top {
+            transform: rotate(180deg);
+            animation: scroltop 0.8s infinite;
+            @keyframes scroltop {
+                0% {
+                    padding-bottom: 0px;
+                }
+                50%{
+                    padding-bottom: 0px;
+                }
+                100% {
+                    padding-bottom: 0px;
+                }
             }
         }
     }

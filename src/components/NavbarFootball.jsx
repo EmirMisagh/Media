@@ -19,7 +19,7 @@ export default function NavbarFootball() {
             .then(res => {
                 setLeagues(res.data.data)
             })
-    }, [])
+    }, [id])
     useEffect(() => {
 
         API.get(`league/${id}`)
@@ -49,9 +49,9 @@ export default function NavbarFootball() {
 
 
                     <div className="row ">
-                        <ul className='navbarfootball__navbar px-4 col-11'>
+                        <ul className='navbarfootball__navbar px-4 col-10'>
                             {Leagues.map((league, i) => {
-                                if (i < 7)
+                                if (i < 3)
                                     return (
                                         <NavLink key={i} to={`/football/league/${league._id}`}>
                                             <li  >{league.name}</li>
@@ -60,10 +60,30 @@ export default function NavbarFootball() {
 
                                     )
                             })}
+                            {Leagues.map((league, i) => {
+                                if (i > 2 && i < 5)
+                                    return (
+                                        <NavLink key={i} to={`/football/league/${league._id}`}>
+                                            <li className='mediumnone' >{league.name}</li>
+
+                                        </NavLink>
+
+                                    )
+                            })}
+                            {Leagues.map((league, i) => {
+                                if (i > 4 && i < 7)
+                                    return (
+                                        <NavLink key={i} to={`/football/league/${league._id}`}>
+                                            <li className='largnone' >{league.name}</li>
+
+                                        </NavLink>
+
+                                    )
+                            })}
 
                         </ul>
-                        <ul className='col-1 p-0'>
-                            <select className="mt-1" name="" id="">
+                        <ul className='col-2 p-0 pe-3'>
+                            <select className="mt-1 me-2" name="" id="">
                                 {Leagues.map((league, i) => {
                                     if (i < 7)
                                         return (

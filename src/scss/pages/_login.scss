@@ -64,7 +64,7 @@
             font-family: 'Great Vibes', cursive;
         }
         button {
-            background-color: rgba(255, 255, 255,0.02);
+            background-color: rgba(255, 0, 0, 0.02);
             width: 300px;
             padding: 15px 0px;
             border-radius: 45px;
@@ -72,6 +72,7 @@
             color: rgb(192, 192, 192);
             font-family: 'Rokkitt', serif;
             font-size: 19px;
+            border: 0;
         }
         button:hover {
             background-color: rgba(255, 255, 255,0.06);
@@ -122,4 +123,6 @@
            
         }
     }
+
+   
 }

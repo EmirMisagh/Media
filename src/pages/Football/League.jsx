@@ -11,64 +11,67 @@ export default function League() {
 
   const { id } = useParams()
 
-  useEffect(() =>{
+  useEffect(() => {
     API.get(`news/league/${id}`)
-    .then(res =>{
-      setNews(res.data.data)
-    })
+      .then(res => {
+        setNews(res.data.data)
+      })
     API.get(`league/${id}`)
-    .then(res =>{
-      setLeague(res.data.data)
-    })
-  },[])
-  useEffect(() =>{
-    API.get(`news/league/${id}`)
-    .then(res =>{
-      setNews(res.data.data)
-    })
-  })
+      .then(res => {
+        setLeague(res.data.data)
+      })
+  }, [id])
+  // useEffect(() => {
+  //   API.get(`news/league/${id}`)
+  //     .then(res => {
+  //       setNews(res.data.data)
+  //     })
+  // }, [id])
   return (
     <div className='container main mt-4'>
-        <div className="row main__newsgrid border-0 mt-1">
-          <div className="newsgrid g-3-2-4 col-12">
-            {News.map((newes, i) => {
-            if (i < 2)
-                return (
-                   <NewsSm key={i} news={newes} />
-                )
+      <div className="row main__newsgrid border-0 mt-1">
+        <div className="newsgrid g-3-2-4 col-12">
+          {News.map((newes, i) => {
+            return (
+              i < 2 ? (
+                <NewsSm key={i} news={newes} />
+              ) : (
+                ""
+              )
+            )
           })}
           <LeagueTable table={League} />
-            {/* <NewsSm />
+          {/* <NewsSm />
             <NewsVid />
             <NewsSm />
             <NewsVid /> */}
-          </div>
-         
-          <div className="newsgrid g-3-3-2-2 col-12">
+        </div>
+
+        <div className="newsgrid g-3-3-2-2 col-12">
           {News.map((newes, i) => {
             if (i > 4 && i < 9)
-                return (
-                   <NewsSm key={i} news={newes} />
-                )
+              return (
+                <NewsSm key={i} news={newes} />
+              )
           })}
-            {/* <NewsSm />
+          {/* <NewsSm />
             <NewsVid />
             <NewsSm />
             <NewsVid /> */}
-          </div>
-          <div className="newsgrid g-3-2-3-2 col-12">
-            {News.map((newes, i) => {
-            if (i < 4)
-                return (
-                   <NewsSm key={i} news={newes} />
-                )
-          })}
-            {/* <NewsSm />
-            <NewsVid />
-            <NewsSm />
-            <NewsVid /> */}
-          </div>
         </div>
+        <div className="newsgrid g-3-2-3-2 col-12">
+          {News.map((newes, i) => {
+            if (i < 4)
+              return (
+                <NewsSm key={i} news={newes} />
+              )
+          })}
+          {/* <NewsSm />
+            <NewsVid />
+            <NewsSm />
+            <NewsVid /> */}
+        </div>
+      </div>
     </div>
   )
 }
