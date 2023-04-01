@@ -151,6 +151,9 @@
             .title {
                 h1 {
                     font-family: 'Cinzel', serif;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
                 }
                 p {
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

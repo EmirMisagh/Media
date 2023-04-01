@@ -18,8 +18,9 @@ export function editUser() {
 export default function Index() {
     const [Menu, setMenu] = useState(0)
     const [People, setPeople] = useState({})
+    const [Notif, setNotif] = useState([])
     const [EditUser, setEditUser] = useState({ img: '', id: 5 })
-   
+
 
 
     useEffect(() => {
@@ -28,6 +29,7 @@ export default function Index() {
         API.get(`users/token/${id}`)
             .then(response => {
                 setPeople(response.data.data)
+                setNotif(response.data.data.notif.reverse())
             })
 
     }, [])
@@ -82,9 +84,19 @@ export default function Index() {
         }
     }
 
-    const Shop = (e) =>{
+    const Shop = (e) => {
         setPeople({ ...People, status: e })
     }
+
+    const HandleNotif = () => {
+        let arr = [...Notif]
+        arr.forEach(i =>{
+            i.view = true
+        })
+        setNotif(arr)
+        API.patch(`users/notifoff/${People._id}`, arr)
+    }
+
     const [Main, setMain] = useState(<Dashboard shop={Shop} />)
     return (
 
@@ -108,9 +120,9 @@ export default function Index() {
                 <div className="col-12 col-md-6  c2" id='menu'>
                     <div className="input">
                         <input type="text" name="" id="" placeholder='Search or jump to...' />
-                            <div className="search">
-                             
-                            </div>
+                        <div className="search">
+
+                        </div>
                     </div>
                     <strong>
                         Dashboard
@@ -128,7 +140,64 @@ export default function Index() {
                 <div className="col-4 c3">
                     <div className="icons">
                         <i>
-                            <IoNotificationsOutline />
+                            <div className='notif' tabIndex={1} onClick={HandleNotif}>
+                                <IoNotificationsOutline />
+                                {Notif.map(item =>{
+                                    return (
+                                        item.view == false && (
+                                            <span>
+
+                                            </span>
+                                        )
+                                    )
+                                })}
+                               
+                            </div>
+                            <div className="notifs">
+                                {Notif.reverse().map((item, i) => {
+                                    return (
+                                        <>
+                                            <small>
+                                                <p>
+                                                    <i>
+                                                        <i>
+                                                            Happy
+                                                        </i><br />
+                                                        <small>
+                                                            {item.message}
+                                                        </small>
+                                                    </i>
+                                                    {item.view == false && (
+
+                                                        <span>
+
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            </small>
+                                            <small>
+                                                <p>
+                                                    <i>
+                                                        <i>
+                                                            Lost
+                                                        </i><br />
+                                                        <small>
+                                                            {item.message}
+                                                        </small>
+                                                    </i>
+                                                    {item.view == false && (
+
+                                                        <span>
+
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            </small>
+                                        </>
+                                    )
+                                })}
+
+                            </div>
                         </i>
                         <i>+</i>
                     </div>
@@ -152,7 +221,7 @@ export default function Index() {
                             </div>
                         </div>
                         <div className="title">
-                            <p>misagh.amir@yahoo.com</p>
+                            <p>{People.email}</p>
                             <button>Edit profile</button>
                             <span className='mt-3'>{People.status} bonos</span>
                             <span className='mt-3'>30 bonos</span>

@@ -13,12 +13,14 @@ import Matches from '../components/Matches';
 import API from '../components/tools/Api'
 import BettingPoster from '../components/BettingPoster';
 import Stiker from '../components/Stiker';
+import LiveVideo from '../components/LiveVideo';
 
 
 export default function Index() {
   const [News, setNews] = useState([])
   const [Tools, setTools] = useState([])
   const [MatchesApi, setMatchesApi] = useState([])
+  const [Game, setGame] = useState([])
   const [SlidResult, setSlidResult] = useState(6);
 
   useEffect(() => {
@@ -31,7 +33,10 @@ export default function Index() {
       .then(responce => {
         setTools(responce.data.data[0])
       })
-
+    API.get('match/live')
+      .then(response => {
+        setGame(response.data.data)
+      })
     API.get(`match`)
       .then(responce => {
         setMatchesApi(responce.data.data)
@@ -56,9 +61,9 @@ export default function Index() {
     }
   })
 
- 
 
- 
+
+
 
   return (
     <>
@@ -101,7 +106,7 @@ export default function Index() {
             >
               {News.map((newes, i) => {
                 if (i < 6)
-                  if (i == 3)
+                  if (i === 3)
                     return (
                       <SwiperSlide key={i}>
                         <div>in 3</div>
@@ -285,6 +290,29 @@ export default function Index() {
           </div>
         </div>
         <div className="row mt-1 main__containervideo">
+          {Game.map((item, i) => {
+            return (
+              (i + 1) % 2 === 0 ? (
+                <LiveVideo key={i} />
+              ) : (
+                <div className="row mainvideo" key={i}>
+                  <div className="col-12 col-md-8 order-2 order-md-1 title">
+                    <h1>Lorem ipsum dolor sit amet.</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic quos id architecto temporibus, tempora quaerat blanditiis incidunt impedit ea odit saepe, ad optio nesciunt assumenda! Aperiam placeat sit est?</p>
+                  </div>
+                  <div className="col-12 col-md-4 order-1 order-md-2 video">
+                    <video controls width="100%" height="100%">
+                      <source src="myVideo.webm" type="video/webm" />
+                      <source src="myVideo.mp4" type="video/mp4" />
+                      <p>
+                        Your browser doesn't support HTML video. Here is a
+                        <a href="myVideo.mp4">link to the video</a> instead.
+                      </p>
+                    </video>
+                  </div>
+                </div>
+              ))
+          })}
           <div className="row mainvideo">
             <div className="col-12 col-md-8 order-2 order-md-1 title">
               <h1>Lorem ipsum dolor sit amet.</h1>
@@ -351,7 +379,7 @@ export default function Index() {
           </div>
 
         </div>
-       
+
       </div>
     </>
   )

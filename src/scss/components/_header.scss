@@ -342,7 +342,9 @@
         background-color: rgb(236, 236, 236);
         margin: 0;
         padding: 0px 30px;
-
+        @media (max-width: 865px) {
+            padding: 0 0px;
+        }
         .Result {
             padding: 0;
 
@@ -419,6 +421,7 @@
         bottom: 15px;
         right: 45%;
         z-index: 999999999;
+        transform: rotate(0deg);
         .bottom {
             text-align: center;
             transition: .4s all;
