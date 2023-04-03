@@ -84,11 +84,10 @@
         gap: 15px;
         border-top: 1px solid rgba(255, 255, 255, 0.5);
         padding-top: 15px;
-
+        overflow: hidden;
         .newsgrid {
             display: grid;
             gap: 10px;
-
             @media (max-width: 767px) {
                 display: flex;
                 flex-direction: column;

@@ -17,10 +17,13 @@ import { BsChevronCompactDown } from "react-icons/bs";
 export default function Header() {
     const [Token, setToken] = useState('');
     const [Admin, setAdmin] = useState('');
+    const [Search, setSearch] = useState('');
     const [Menuon, setMenuon] = useState(0);
     const [Result, setResult] = useState([]);
     const [Teams, setTeams] = useState([]);
+    const [TeamsSearch, setTeamsSearch] = useState([]);
     const [Leagues, setLeagues] = useState([]);
+    const [LeaguesSearch, setLeaguesSearch] = useState([]);
     const [Menuclass, setMenuclass] = useState({
         menu: 'menuoff',
         saye: 'sayeoff'
@@ -33,10 +36,12 @@ export default function Header() {
         API.get('team')
             .then(response => {
                 setTeams(response.data.data)
+                setTeamsSearch(response.data.data)
             })
         API.get('league')
             .then(response => {
                 setLeagues(response.data.data)
+                setLeaguesSearch(response.data.data)
             })
 
 
@@ -97,11 +102,39 @@ export default function Header() {
 
     const scrolHandle = () => {
         if (window.pageYOffset > 70) {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+            window.scrollTo({ top: 0, behavior: 'smooth' })
         } else {
-          window.scrollTo({ top: 870, behavior: 'smooth' })
+            window.scrollTo({ top: 870, behavior: 'smooth' })
         }
-      }
+    }
+
+    const searchpost = (e) => {
+        let searchmusic = e.target;
+        setSearch(searchmusic.value)
+        if (searchmusic.value != '') {
+            let serch = Teams.filter(user => {
+                if (user.name.toLowerCase().includes(searchmusic.value.toLowerCase())) {
+                    return user;
+                }
+            });
+            setTeamsSearch(serch)
+        } else
+            setTeamsSearch(Teams)
+        if (searchmusic.value != '') {
+            let serch = Leagues.filter(user => {
+                if (user.name.toLowerCase().includes(searchmusic.value.toLowerCase())) {
+                    return user;
+                }
+            });
+            setLeaguesSearch(serch)
+            console.log(LeaguesSearch)
+        } else {
+
+            setLeaguesSearch(Leagues)
+
+        }
+
+    }
 
     return (
         <>
@@ -117,7 +150,7 @@ export default function Header() {
                     </div>
                     <div className="col-6 col-md-6 c2">
                         <div className='p-0 input-search'>
-                            <input type="text" name="" id="" placeholder='Search' />
+                            <input onChange={(e) => searchpost(e)} type="text" name="" id="" placeholder='Search' />
                             <div className="searchmenu">
                                 <ul>
                                     <li>Results</li>
@@ -144,18 +177,23 @@ export default function Header() {
                                     <li className='b-0'>
                                         Soccer Leagues  <br />
                                         <small>
-                                            {Leagues.map((league, i) => {
-                                                if (i < 20)
-                                                    return (
-                                                        <NavLink to={`/football/league/${league._id}`} key={i} >
-                                                            <small key={i}>
-                                                                {" " + league.name} |
-                                                            </small>
-                                                        </NavLink>
+                                            {LeaguesSearch.length != 0 ? (
+                                                LeaguesSearch.map((league, i) => {
+                                                    if (i < 20)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
 
-                                                    )
-                                            })}
-
+                                                        )
+                                                })
+                                            ) : (
+                                                <small>
+                                                    not found
+                                                </small>
+                                            )}
                                         </small>
 
                                     </li>
@@ -164,7 +202,8 @@ export default function Header() {
                                     <li>
                                         Team Soccer <br />
                                         <small>
-                                            {Teams.map((team, i) => {
+                                        {TeamsSearch.length != 0 ? (
+                                            TeamsSearch.map((team, i) => {
                                                 if (i < 25)
                                                     return (
                                                         <NavLink to={`/football/team/${team._id}`} key={i} >
@@ -174,8 +213,12 @@ export default function Header() {
                                                         </NavLink>
 
                                                     )
-                                            })}
-
+                                            })
+                                            ) : (
+                                                <small>
+                                                    not found
+                                                </small>
+                                            )}
                                         </small>
 
                                     </li>
@@ -203,7 +246,7 @@ export default function Header() {
                             </div>
                         </div>
                         <button>
-                            <NavLink to='/search'>
+                            <NavLink to={`/search/?search=${Search}`}>
                                 <i><AiOutlineSearch /></i>
                             </NavLink>
                         </button>
@@ -319,7 +362,7 @@ export default function Header() {
                                             Other League Soccer <br />
                                             <small>
                                                 {Leagues.map((league, i) => {
-                                                    if (i < 4)
+                                                    if (i > 4)
                                                         return (
                                                             <NavLink to={`/football/league/${league._id}`} key={i} >
                                                                 <small key={i}>
@@ -479,19 +522,257 @@ export default function Header() {
                                 <NavLink to='#'>Basketball</NavLink>
                                 <div className="Basketballdiv">
                                     <ul>
-                                        <li><h5>Laliga</h5></li>
-                                        <li><small>Laliga</small></li>
-                                        <li><small>Laliga</small></li>
+                                        <li>Results</li>
+                                        {Leagues.map((league, i) => {
+                                            return (
+                                                league.navbar === true && (
+
+                                                    <li key={i}>
+                                                        <NavLink to={`/football/league/${league._id}`}>
+                                                            {league.name} <br />
+                                                            <small>
+                                                                Standings |
+                                                                Schedule
+                                                            </small>
+                                                        </NavLink>
+                                                    </li>
+                                                )
+
+                                            )
+                                        })}
+
                                     </ul>
                                     <ul>
-                                        <li><h5>Laliga</h5></li>
-                                        <li><small>Laliga</small></li>
-                                        <li><small>Laliga</small></li>
+                                        <li>
+                                            Euro Best Player <br />
+                                            <small>
+                                                Schedule
+                                            </small>
+                                        </li>
+                                        <li>
+                                            Ranking <br />
+                                            <small>
+                                                League Ranking |
+                                                Team Ranking |
+                                                Clausura Standings |
+                                                Clausura Schedule
+                                            </small>
+                                        </li>
+                                        <li className='b-0'>
+                                            European Soccer <br />
+                                            <small>
+                                                {Leagues.map((league, i) => {
+                                                    if (i < 7)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            Euro Team Soccer <br />
+                                            <small>
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                        <li className='b-0'>
+                                            Other League Soccer <br />
+                                            <small>
+                                                {Leagues.map((league, i) => {
+                                                    if (i > 4)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            France Football <br />
+                                            <small>
+                                                Formula 1
+                                                MotoGP
+                                                Moto2
+                                                Moto3
+                                            </small>
+                                        </li>
+                                        <li>
+                                            Other Team Soccer <br />
+                                            <small>
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
                             <li className='Valliball' id="nav-foul">
                                 <NavLink to='#'>Tennis</NavLink>
+                                <div className="Footballdiv">
+                                    <ul>
+                                        <li>Results</li>
+                                        {Leagues.map((league, i) => {
+                                            return (
+                                                league.navbar === true && (
+
+                                                    <li key={i}>
+                                                        <NavLink to={`/football/league/${league._id}`}>
+                                                            {league.name} <br />
+                                                            <small>
+                                                                Standings |
+                                                                Schedule
+                                                            </small>
+                                                        </NavLink>
+                                                    </li>
+                                                )
+
+                                            )
+                                        })}
+
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            Euro Best Player <br />
+                                            <small>
+                                                Schedule
+                                            </small>
+                                        </li>
+                                        <li>
+                                            Ranking <br />
+                                            <small>
+                                                League Ranking |
+                                                Team Ranking |
+                                                Clausura Standings |
+                                                Clausura Schedule
+                                            </small>
+                                        </li>
+                                        <li className='b-0'>
+                                            European Soccer <br />
+                                            <small>
+                                                {Leagues.map((league, i) => {
+                                                    if (i < 7)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            Euro Team Soccer <br />
+                                            <small>
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                        <li className='b-0'>
+                                            Other League Soccer <br />
+                                            <small>
+                                                {Leagues.map((league, i) => {
+                                                    if (i > 4)
+                                                        return (
+                                                            <NavLink to={`/football/league/${league._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + league.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            France Football <br />
+                                            <small>
+                                                Formula 1
+                                                MotoGP
+                                                Moto2
+                                                Moto3
+                                            </small>
+                                        </li>
+                                        <li>
+                                            Other Team Soccer <br />
+                                            <small>
+                                                {Teams.map((team, i) => {
+                                                    if (i < 15)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
+
+                                                        )
+                                                })}
+
+                                            </small>
+
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li className='Betting' id="nav-foul">
                                 <NavLink to='#'>Judo</NavLink>

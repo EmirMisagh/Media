@@ -1,0 +1,273 @@
+.mainmatches {
+    .swiper {
+        padding: 0;
+        -webkit-box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.27);
+        box-shadow: 0px 0px 10px 6px rgba(255, 255, 255, 0.24);
+        height: 260px;
+        @media (max-width: 767px) {
+            height: 200px;
+        }
+        .slide {
+            .bettingposter {
+                border-radius: 0;
+                height: 260px;
+                @media (max-width: 767px) {
+                    height: 200px;
+                }
+                .img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    transition: .4s;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0.9;
+                        transition: .4s;
+                        border: 0;
+                        object-fit: inherit;
+                    }
+                }
+                .title {
+                    display: none;
+                    .left {
+                        padding-bottom: 30px;
+                    }
+
+                    .time {
+                        padding-bottom: 30px;
+                    }
+
+                    .right {
+                        padding-bottom: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-all {
+
+
+    margin-top: 5px;
+
+    .button-trand {
+        text-align: center;
+        margin-top: 0px;
+        padding-top: 30px;
+    }
+
+    .button-trand input {
+        margin-bottom: 15px;
+        width: 340px;
+        padding-left: 7px;
+        outline: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .button-trand button {
+        color: aliceblue;
+        border: 1px solid aliceblue;
+        padding-left: 21px;
+        padding-right: 21px;
+
+    }
+
+    .mood-trand {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        text-align: center;
+        column-gap: 5px;
+        padding: 0px;
+
+        padding-left: 49px;
+        padding-right: 0px;
+        margin-top: 10px;
+        padding-top: 0px;
+        padding-bottom: 0;
+    }
+
+    .mood-trand img {
+        height: 110px;
+        border-radius: 16px;
+    }
+
+    .mood-trand img:hover {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+}
+
+.main-music {
+    width: 95%;
+    height: auto;
+
+    position: relative;
+}
+
+.main-music h5 {
+
+    padding: 5px;
+    margin-top: 20px;
+    color: aliceblue;
+}
+
+.time-music {
+    width: 100%;
+    height: 700px;
+    text-align: center;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.main-time {
+    text-align: left;
+    margin-top: 15px;
+    overflow: scroll;
+    height: 100%;
+}
+
+.grid-al {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    column-gap: 5px;
+    padding: 0px;
+    padding-left: 9px;
+    padding-right: 9px;
+    width: 100%;
+    color: aliceblue;
+}
+
+.grid-al div {
+    margin-left: 3px;
+    padding-bottom: 10px;
+}
+
+#grid-al div p {
+    font-size: small;
+    margin-top: 7px;
+    padding-top: 0;
+    background-color: rgb(63, 70, 27);
+}
+
+.grid-al div h6 {
+    font-size: 15px;
+    margin-top: 0px;
+    padding-top: 0;
+
+}
+
+.grid-al div img {
+    height: 140px;
+    margin-bottom: 0;
+    margin-top: 0px;
+    width: 100%;
+}
+
+.grid-all {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    column-gap: 5px;
+    padding: 0px;
+    padding-left: 9px;
+    padding-right: 9px;
+
+}
+
+.grid-all-sm {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 5px;
+    padding: 0px;
+
+    padding-left: 9px;
+    padding-right: 9px;
+
+
+}
+
+.grid-all div {
+    margin-left: 3px;
+    padding-bottom: 10px;
+}
+
+.grid-all div p {
+    font-size: small;
+    margin-top: 7px;
+    padding-top: 0;
+
+}
+
+.grid-all div h6 {
+    font-size: 15px;
+    margin-top: 0px;
+    padding-top: 0;
+
+}
+
+.grid-all div img {
+    height: 140px;
+    margin-bottom: 0;
+    margin-top: 0px;
+
+}
+
+.fixplaylist {
+    position: fixed;
+    background-color: rgba(218, 214, 214, 0.7);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    top: -30%;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    border-radius: 0px 0px 10px 10px;
+    transition: .3s;
+    z-index: 999999;
+    overflow: auto;
+
+}
+
+.fixplaylist div {
+
+    padding-left: 11%;
+    display: flex;
+    margin-top: 5px;
+    border-bottom: 2px solid #000;
+    position: relative;
+}
+
+.fixplaylist div img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+}
+
+.fixplaylist div h6 {
+
+    height: 20%;
+    margin-top: 40px;
+    margin-left: 35px;
+}
+
+.fixplaylist div button {
+    right: 7%;
+    top: 30px;
+    position: absolute;
+    padding: 6px 18px;
+    font-weight: 700;
+}
+
+.rightclick {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999999999;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    padding: 10px 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 89% 76%, 95% 100%, 75% 76%, 0% 75%);
+
+}

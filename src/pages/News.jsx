@@ -48,8 +48,19 @@ export default function News() {
                     </div>
                     <div className="col-12 col-md-8  col-lg-6 px-4 pt-3 pt-md-0 pe-md-4 ps-md-4 ps-lg-0 order-1 order-lg-2 ">
                         <div className=" border-0 m-0 right">
+                            {News.video === true ? (
+                                <video controls width="100%" height="100%">
+                                    <source src={News.img} type="video/webm" />
+                                    <source src={News.img} type="video/mp4" />
+                                    <p>
+                                        Your browser doesn't support HTML video. Here is a
+                                        <a href="myVideo.mp4">link to the video</a> instead.
+                                    </p>
+                                </video>
 
-                            <img src={News.img} alt="" />
+                            ) : (
+                                <img src={News.img} alt="" />
+                            )}
 
                         </div>
                     </div>

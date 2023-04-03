@@ -39,12 +39,10 @@ export default function Match() {
             API.get(`team/${response.data.data.fristteam}`)
             .then(response => {
                 setFTeam(response.data.data)
-                console.log(response.data.data)
             })
             API.get(`team/${response.data.data.lastteam}`)
             .then(response => {
                 setLTeam(response.data.data)
-                console.log(response.data.data)
             })
         })
         API.get(`team`)
@@ -74,7 +72,7 @@ export default function Match() {
         // console.log(People)
       
 
-    }, [FTeam, LTeam])
+    }, [ LTeam])
 
     const Close = async () => {
         API.patch(`match/betting/update/${id}`, user)
@@ -133,8 +131,8 @@ export default function Match() {
                 <div className="col-12 pt-5 px-5 oreder-1">
                     <button onClick={() => { window.history.back() }} className="butt btn btn-outline-light px-4"><AiOutlineArrowLeft /></button>
                 </div>
-                <div className="col-12  col-lg-6 p-2 mt-4 p-md-0 py-5 order-2 order-lg-1">
-                    <div className="divlogin__backlogin p-0">
+                <div className="col-12  col-lg-6 p-2 mt-md-4 p-md-0 py-md-5 px-4 order-2 order-lg-1">
+                    <div className="divlogin__backlogin">
                         <div>
 
                             <h3>
@@ -155,8 +153,8 @@ export default function Match() {
                             </div>
                             <div className="title text-center p-0">
                                 <video controls width="100%" height="100%">
-                                    <source src="{props.newsprops.img} "type="video/webm" />
-                                    <source src="{props.newsprops.img}" type="video/mp4" />
+                                    <source src="http://localhost:3001/image/news/vid20190104_MOMOLAND_ëª¨ëª¨ë\u009e\u009cë\u0093\u009c_LIVE_IN_CONCERT_in_DUBAI_Can_t_KOBTlHW7oQE.mkv"type="video/webm" />
+                                    <source src="http://localhost:3001/image/news/vid20190104_MOMOLAND_ëª¨ëª¨ë\u009e\u009cë\u0093\u009c_LIVE_IN_CONCERT_in_DUBAI_Can_t_KOBTlHW7oQE.mkv" type="video/mp4" />
                                     <p>
                                         Your browser doesn't support HTML video. Here is a
                                         <a href="myVideo.mp4">link to the video</a> instead.
@@ -180,7 +178,7 @@ export default function Match() {
                     </h5>
                 )}
                 <form className='row '>
-                    <div className="col-6 p-1">
+                    <div className="col-12 col-md-6 p-1">
                         <div className="matchbetting__firstteam" style={DisibelStyle}>
                             <h2>
                                 <p className='check active' name='fteam' id='fteam' onClick={e => Checkbox(e)}></p>
@@ -203,7 +201,7 @@ export default function Match() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-6 p-1">
+                    <div className="col-12 col-md-6 p-1">
                         <div className="matchbetting__firstteam" style={DisibelStyle}>
                             <h2>
                                 <p className='check' name='lteam' id='lteam' onClick={e => Checkbox(e)}></p>

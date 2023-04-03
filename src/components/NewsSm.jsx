@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LodingCom } from './Loding'
-import { AiFillInstagram } from "react-icons/ai";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { FaPlayCircle } from "react-icons/fa";
 
 
 export default function NewsSm(props) {
@@ -16,14 +17,20 @@ export default function NewsSm(props) {
     }, 2000);
   }, [])
 
-  const cutString = (string) => {
+  const cutString = (string, num) => {
     let name = string
     name = name.split(' ')
-    name = name.splice(0, 11)
-    name = name.join(' ');
+    if (name.length > num) {
 
-    return name + "...";
-}
+      name = name.splice(0, num)
+      name = name.join(' ');
+
+      return name + "...";
+    } else {
+      name = name.join(' ');
+      return name;
+    }
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ export default function NewsSm(props) {
             {props.news.video === true ? (
               <>
                 <div className="video">
-                  <video controls width="100%" height="100%">
+                  <video width="100%" height="100%">
                     <source src={props.news.img} type="video/webm" />
                     <source src={props.news.img} type="video/mp4" />
                     <p>
@@ -43,9 +50,11 @@ export default function NewsSm(props) {
                       <a href="myVideo.mp4">link to the video</a> instead.
                     </p>
                   </video>
-                  <i>
-                    <AiFillInstagram />
-                  </i>
+                  <div className="icon">
+                    <i>
+                      <FaPlayCircle />
+                    </i>
+                  </div>
                 </div>
               </>
             ) : (
@@ -56,8 +65,8 @@ export default function NewsSm(props) {
           </div>
           <div className="title">
             <small className="headsmall">{props.news.title}</small>
-            <h6 className="">{props.news.head}</h6>
-            <p>{cutString(props.news.Description)}</p>
+            <h6 className="">{cutString(props.news.head, 5)}</h6>
+            <p>{cutString(props.news.Description, 11)}</p>
             <small className="date">{date.getFullYear()}/{date.getMonth()}/{date.getDay()}</small>
           </div>
         </div>

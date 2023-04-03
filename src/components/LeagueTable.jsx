@@ -1,11 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import API from './tools/Api'
 
 export default function LeagueTable(props) {
     const [Team, setTeam] = useState([])
     const [League, setLeague] = useState([])
+    const [NameLeague, setNameLeague] = useState({})
 
     const { id } = useParams()
 
@@ -14,27 +15,36 @@ export default function LeagueTable(props) {
             .then(res => {
                 setTeam(res.data.data)
             })
-            API.get(`league/${id}`)
-            .then(res =>{
-              setLeague(res.data.data.table.sort(function (a, b) {
-                return a.number - b.number;
-            }))
+        API.get(`league/${id}`)
+            .then(res => {
+                setLeague(res.data.data.table.sort(function (a, b) {
+                    return a.number - b.number;
+                }))
+                setNameLeague(res.data.data)
             })
-    },[id])
+    }, [id])
 
-    const TeamName = (id) =>{
+    const TeamName = (id) => {
         let tem = Team.find(i => i._id === id)
         return tem.name
     }
 
     const more = () => {
         const table = document.querySelector('.team');
-        table.scrollTo({ top: 170, behavior: 'smooth' })
+        let scrol = table.scrollTop;
+        scrol += 170;
+        const top = document.getElementById('top');
+        top.style.display = 'block';
+        table.scrollTo({ top: scrol, behavior: 'smooth' })
     }
     return (
         <div className='table'>
             <div className="head">
-                <h4>Laliga</h4>
+                <h4>
+                <NavLink to={`/football/league/${NameLeague._id}`}>
+                    {NameLeague.name}
+                    </NavLink>
+                    </h4>
             </div>
             <div className="team">
                 <table className='border-1 '>
@@ -49,20 +59,31 @@ export default function LeagueTable(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {League.map((team, i) =>{
-                            return(
+                        {League.map((team, i) => {
+                            return (
                                 <tr>
-                                <td>{team.number}</td>
-                                <td id='name'>{TeamName(team.id)}</td>
-                                <td>59</td>
-                                <td>{team.game}</td>
-                                <td>59</td>
-                                <td>59</td>
-                                <td>59</td>
-                            </tr>
+                                    <td>
+                                        {team.number < 4 ? (
+                                            <img src="http://localhost:3001/image/Tools/logo/champions.png" alt="" />
+                                        ) : (
+                                            <img src="http://localhost:3001/image/Tools/logo/euro.png" alt="" />
+                                        )}
+                                        {team.number}
+                                    </td>
+                                    <td id='name'>
+                                        <NavLink to={`/football/team/${team.id}`}>
+                                            {TeamName(team.id)}
+                                        </NavLink>
+                                    </td>
+                                    <td>{team.point}</td>
+                                    <td>{team.game}</td>
+                                    <td>{team.win}</td>
+                                    <td>{team.deve}</td>
+                                    <td>{team.lose}</td>
+                                </tr>
                             )
                         })}
-                      
+
                     </tbody>
                 </table>
 
@@ -71,6 +92,10 @@ export default function LeagueTable(props) {
                 <button onClick={more}>
 
                     More
+                </button>
+                <button style={{ display: 'none' }} id='top' onClick={(e) => { const table = document.querySelector('.team'); table.scrollTo({ top: 0, behavior: 'smooth' }); e.target.style.display = 'none'; }}>
+
+                    top
                 </button>
             </div>
         </div>

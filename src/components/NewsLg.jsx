@@ -30,27 +30,7 @@ export default function NewsLg(props) {
       ) : (
         <div className='newsLg'>
           <div className="img">
-            {props.newsprops.video === true ? (
-              <>
-                <div className="video">
-                  <video  width="100%" height="100%">
-                    <source src={props.newsprops.img} type="video/webm" />
-                    <source src={props.newsprops.img} type="video/mp4" />
-                    <p>
-                      Your browser doesn't support HTML video. Here is a
-                      <a href="myVideo.mp4">link to the video</a> instead.
-                    </p>
-                  </video>
-                  <i>
-                    <AiFillInstagram />
-                  </i>
-                </div>
-              </>
-            ) : (
-              <>
-                <img src={props.newsprops.img} alt="" />
-              </>
-            )}
+            <img src={props.newsprops.img} alt="" />
           </div>
           <div className="title">
             <div className="atterbut">

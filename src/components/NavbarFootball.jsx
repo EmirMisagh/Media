@@ -85,7 +85,6 @@ export default function NavbarFootball() {
                         <ul className='col-2 p-0 pe-3'>
                             <select className="mt-1 me-2" name="" id="">
                                 {Leagues.map((league, i) => {
-                                    if (i < 7)
                                         return (
                                             <option value={league._id}>
                                                 <NavLink key={i} to={`/football/league/${league._id}`}>

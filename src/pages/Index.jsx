@@ -105,14 +105,8 @@ export default function Index() {
               }}
             >
               {News.map((newes, i) => {
-                if (i < 6)
-                  if (i === 3)
-                    return (
-                      <SwiperSlide key={i}>
-                        <div>in 3</div>
-                      </SwiperSlide>
-                    )
-                  else
+                if (i < 11)
+                 if (newes.video == false)
                     return (
                       <SwiperSlide key={i}>
                         <NavLink to={`/news/${newes._id}`}>
@@ -153,11 +147,12 @@ export default function Index() {
           >
             {News.map((newes, i) => {
               if (i < 11)
-                return (
-                  <SwiperSlide key={i}>
-                    <Stiker news={newes} />
-                  </SwiperSlide>
-                )
+                if (newes.video == false)
+                  return (
+                    <SwiperSlide key={i}>
+                      <Stiker news={newes} />
+                    </SwiperSlide>
+                  )
             })}
           </Swiper>
         </div>
@@ -186,7 +181,7 @@ export default function Index() {
             })}
           </div>
           <div className="newsgrid g-5-5 col-12">
-            {News.map((newes, i) => {
+            {News.filter(i => i.video == false).map((newes, i) => {
               if (i < 2)
                 return (
                   <div key={i}>
@@ -199,7 +194,7 @@ export default function Index() {
           </div>
           <div className="newsgrid g-3-3-2-2 col-12">
             {News.map((newes, i) => {
-              if (i > 4 && i < 9)
+              if (i > 3 && i < 8)
                 return (
                   <NavLink to={`/news/${newes._id}`} key={i}>
 
@@ -210,7 +205,7 @@ export default function Index() {
           </div>
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
-              if (i < 4)
+               if (i > 7 && i < 12)
                 return (
                   <NavLink to={`/news/${newes._id}`} key={i}>
 
@@ -227,10 +222,11 @@ export default function Index() {
             </h5>
           </div>
           <div className="col-4 more">
-
+          <NavLink to='/football/matches'>
             <h5 className='more'>
               more
             </h5>
+            </NavLink>
           </div>
         </div>
         <div className="row main__bettingposter mt-1">
@@ -292,8 +288,8 @@ export default function Index() {
         <div className="row mt-1 main__containervideo">
           {Game.map((item, i) => {
             return (
-              (i + 1) % 2 === 0 ? (
-                <LiveVideo key={i} />
+              (i + 1) % 2 !== 0 ? (
+                <LiveVideo key={i} game={item} />
               ) : (
                 <div className="row mainvideo" key={i}>
                   <div className="col-12 col-md-8 order-2 order-md-1 title">

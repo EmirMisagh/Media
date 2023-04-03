@@ -113,6 +113,9 @@
                         }
                     }
                 }
+                .searchmenu:hover {
+                    display: grid;
+                }
             }
           
             button {
@@ -276,7 +279,7 @@
                 }
 
                 .Basketball:hover .Basketballdiv {
-                    display: flex;
+                    display: grid;
                 }
             }
 

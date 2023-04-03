@@ -11,6 +11,14 @@ export default function Stiker(props) {
       setLoding(1)
     }, 2000);
   },[])
+  const cutString = (string) => {
+    let name = string
+    name = name.split(' ')
+    name = name.splice(0, 2)
+    name = name.join(' ');
+
+    return name ;
+}
   return (
     <>
     {Loding == 0 ? (
@@ -20,7 +28,7 @@ export default function Stiker(props) {
         <div>
             <img src={props.news.img} alt="" />
         </div>
-        <p>{props.news.head}</p>
+        <p>{cutString(props.news.head)}</p>
     </div>
     )}
     </>
