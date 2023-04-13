@@ -48,6 +48,9 @@
                 width: 50%;
                 height: 45%;
             }
+            p {
+                color: rgb(255, 255, 255);
+            }
         }
 
         .time {
@@ -81,8 +84,17 @@
                 width: 50%;
                 height: 45%;
             }
+            p {
+                color: rgb(255, 255, 255);
+            }
         }
     }
 
+}
+.bettingposter:hover .title {
+    display: none;
+}
+.bettingposter:hover .img img {
+    opacity: 1;
 }
 

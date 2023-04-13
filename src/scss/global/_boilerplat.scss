@@ -1,0 +1,123 @@
+@use 'colors' as *;
+
+.night {
+    $background-night: #fff;
+    background-color: var(--color);
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+*::-webkit-scrollbar {
+    background-color: #000000;
+    width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(207, 207, 207);
+    border-radius: 100px;
+    height: 50%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: $background-night;
+    color: rgb(255, 255, 255);
+    overflow-x: hidden;
+
+    p {
+        color: rgb(194, 194, 194);
+    }
+
+    img {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+body[id='dark'] {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(250, 249, 246);
+    background-color: rgb(249, 246, 238);
+    background-color: rgb(236, 232, 222);
+    color: rgb(255, 255, 255);
+    overflow-x: hidden;
+
+    p {
+        color: #141414;
+        font-weight: 600;
+    }
+    h1 {
+        color: #141414;
+        font-weight: 700;
+    }
+
+    h6 {
+        color: #000000;
+        font-weight: 700;
+    }
+
+    h5 {
+        color: #000000;
+    }
+
+    img {
+        border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    .bettingposter {
+        img {
+            opacity: 1;
+        }
+
+        .title {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+    .main {
+        &__newsgrid {
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+          
+        }
+        &__bettingposter {
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+        }
+        &__containervideo {
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+body::-webkit-scrollbar {
+    background-color: #000000;
+    width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(207, 207, 207);
+    border-radius: 100px;
+    height: 50%;
+}
+
+a,
+a::before,
+a:active,
+a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+#root {
+    padding: 0;
+}

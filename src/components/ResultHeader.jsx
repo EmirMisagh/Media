@@ -27,14 +27,14 @@ export default function ResultHeader(props) {
         <NavLink to={`/football/team/${Fteam._id}`}>
 
           <img src={Fteam.img} alt="" />
-          <b className='pt-5'>{Fteam.nickname}</b>
+          <b className=''>{Fteam.nickname}</b>
           <i>{props.game.fristresult}</i>
         </NavLink>
       </small>
       <small>
         <NavLink to={`/football/team/${Lteam._id}`}>
           <img src={Lteam.img} alt="" />
-          <b className='pt-5'>{Lteam.nickname}</b>
+          <b className=''>{Lteam.nickname}</b>
           <i>{props.game.lastresult}</i>
         </NavLink>
       </small>

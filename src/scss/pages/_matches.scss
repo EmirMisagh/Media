@@ -53,13 +53,13 @@
     margin-top: 5px;
 
     .button-trand {
-        text-align: center;
+        text-align: left;
         margin-top: 0px;
         padding-top: 30px;
     }
 
     .button-trand input {
-        margin-bottom: 15px;
+        margin-bottom: 0px;
         width: 340px;
         padding-left: 7px;
         outline: none;
@@ -138,6 +138,14 @@
     padding-right: 9px;
     width: 100%;
     color: aliceblue;
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+    gap: 20px;
+    margin-top: 30px;
+    background-color: brown;
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr ;
+    }
 }
 
 .grid-al div {
@@ -173,7 +181,13 @@
     padding: 0px;
     padding-left: 9px;
     padding-right: 9px;
-
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    gap: 10px;
+    margin-top: 30px;
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr ;
+    }
 }
 
 .grid-all-sm {

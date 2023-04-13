@@ -74,7 +74,7 @@
                     padding-right: 30px;
                     transition: .3s;
                 }
-                .Footballdiv {
+                .Footballdiv,.NBAdiv,.Basketballdiv {
                     display: none;
                     flex-direction: column;
                     position: fixed;
@@ -91,6 +91,7 @@
                         top: 0;
                         width: 50vw;
                         height: 100vh;
+                        left: 50vw;
                     }
                     ul {
                         margin: 0;
@@ -124,13 +125,14 @@
             li:hover > .nav {
                 padding-right: 20px;
             }
-            li:hover > .Footballdiv {
+            li:hover > .Footballdiv, li:hover > .NBAdiv, li:hover > .Basketballdiv {
                 display: flex;
 
                     @media (max-width: 865px) {
                         display: flex;
                     }
             }
+          
         }
     }
 }

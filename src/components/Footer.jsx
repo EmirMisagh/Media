@@ -5,7 +5,7 @@ import { AiFillInstagram,AiFillTwitterCircle,AiFillLinkedin,AiOutlineSearch } fr
 export default function Footer() {
   return (
     <>
-    <div className="container-fluid p-0 mt-5">
+    <div className="container-fluid bg-info p-0 mt-5 mb-0">
         <div className="container-fluid footer" id="footer-blue">
             <div className="row footer__start  ">
                 <div className="col-12 ">
@@ -70,7 +70,7 @@ export default function Footer() {
                 </div>
             </div>
         </div>
-        <div className="container-fluid footer pb-0" id="footer-blue">
+        <div className="container-fluid footer pb-0 mb-0" id="footer-blue">
             <div className="row footer__end  pt-4">
                 <div className="row" id="tozih">
 
@@ -104,11 +104,11 @@ export default function Footer() {
                 </div>
                 <div className="row">
                     <div className="col-12 bottom ">
-                        <ul>
-                            <li>© Skillshare, Inc. 2022</li>
-                            <li>Help</li>
-                            <li>Privacy</li>
-                            <li>Terms</li>
+                        <ul className='row'>
+                            <li className='col-12 col-sm-auto'>© Skillshare, Inc. 2022</li>
+                            <li className='col-12 col-sm-auto'>Help</li>
+                            <li className='col-12 col-sm-auto'>Privacy</li>
+                            <li className='col-12 col-sm-auto'>Terms</li>
                         </ul>
                     </div>
                 </div>

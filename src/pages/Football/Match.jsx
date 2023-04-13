@@ -3,12 +3,16 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { NavLink, useParams } from "react-router-dom";
 import API from '../../components/tools/Api'
 import BettingPoster from '../../components/BettingPoster';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Matches from '../../components/Matches';
 
 export default function Match() {
 
     const { id } = useParams();
 
+    const [Tools, setTools] = useState([])
+    const [MatchesApi, setMatchesApi] = useState([])
     const [People, setPeople] = useState('')
     const [Match, setMatch] = useState('')
     const [Team, setTeam] = useState('first')
@@ -34,24 +38,29 @@ export default function Match() {
     useEffect(() => {
         const idUser = localStorage.getItem('token')
         API.get(`match/${id}`)
-        .then(response => {
-            setMatch(response.data.data)
-            API.get(`team/${response.data.data.fristteam}`)
             .then(response => {
-                setFTeam(response.data.data)
+                setMatch(response.data.data)
+                API.get(`team/${response.data.data.fristteam}`)
+                    .then(response => {
+                        setFTeam(response.data.data)
+                    })
+                API.get(`team/${response.data.data.lastteam}`)
+                    .then(response => {
+                        setLTeam(response.data.data)
+                    })
             })
-            API.get(`team/${response.data.data.lastteam}`)
-            .then(response => {
-                setLTeam(response.data.data)
-            })
-        })
         API.get(`team`)
             .then(response => {
                 setTeamList(response.data.data)
             })
-      
-
-
+        API.get(`tools`)
+            .then(responce => {
+                setTools(responce.data.data[0])
+            })
+        API.get(`match`)
+            .then(responce => {
+                setMatchesApi(responce.data.data)
+            })
         if (idUser != null) {
             API.get(`users/token/${idUser}`)
                 .then(response => {
@@ -70,15 +79,17 @@ export default function Match() {
         //     })
         // }
         // console.log(People)
-      
 
-    }, [ LTeam])
+
+    }, [LTeam])
 
     const Close = async () => {
         API.patch(`match/betting/update/${id}`, user)
             .then(response => {
-                console.log(response.data.data);
-
+                toast.success(response.data.data, {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    className: 'toast-message'
+                });
             });
     }
 
@@ -153,7 +164,7 @@ export default function Match() {
                             </div>
                             <div className="title text-center p-0">
                                 <video controls width="100%" height="100%">
-                                    <source src="http://localhost:3001/image/news/vid20190104_MOMOLAND_ëª¨ëª¨ë\u009e\u009cë\u0093\u009c_LIVE_IN_CONCERT_in_DUBAI_Can_t_KOBTlHW7oQE.mkv"type="video/webm" />
+                                    <source src="http://localhost:3001/image/news/vid20190104_MOMOLAND_ëª¨ëª¨ë\u009e\u009cë\u0093\u009c_LIVE_IN_CONCERT_in_DUBAI_Can_t_KOBTlHW7oQE.mkv" type="video/webm" />
                                     <source src="http://localhost:3001/image/news/vid20190104_MOMOLAND_ëª¨ëª¨ë\u009e\u009cë\u0093\u009c_LIVE_IN_CONCERT_in_DUBAI_Can_t_KOBTlHW7oQE.mkv" type="video/mp4" />
                                     <p>
                                         Your browser doesn't support HTML video. Here is a
@@ -169,63 +180,98 @@ export default function Match() {
             </div>
             <div className="row matchbetting py-5 mb-5">
                 {People == "" && (
-                    <h5 className='ms-3 text-danger'>
-                        You must login or register first
-                        <h6></h6>
-                        <NavLink className='text-primary' to='/login'>
-                            Go to login
-                        </NavLink>
-                    </h5>
+                    <div className='col-12'>
+                        <h5 className='ms-3 text-danger'>
+                            You must login or register first
+                            <h6></h6>
+                            <NavLink className='text-primary' to='/login'>
+                                Go to login
+                            </NavLink>
+                        </h5>
+                    </div>
                 )}
-                <form className='row '>
-                    <div className="col-12 col-md-6 p-1">
+                <form className=' '>
+                    <div className="row">
+                    <div className="col-12 col-md-4 order-2 order-md-1">
+                        <h5>Weeks Match</h5>
+                        <div className="mainmatchmore mt-4" style={{ backgroundImage: `url(${Tools.bg_match})` }}>
+                            {MatchesApi.map((match, i) => {
+                                if (i < 10)
+                                    return (
+                                        <NavLink key={i} to={`/football/match/${match._id}`}>
+                                            <Matches game={match} />
+                                        </NavLink>
+                                    )
+                            })}
+
+
+
+                            <h6 className='mt-2'>
+                                <NavLink to='/football/matches'>
+                                    <button>More</button>
+                                </NavLink>
+                            </h6>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-8 order-1 order-md-2 p-1 mt-4 mt-md-0">
+                        <h5>Betting. Good luke</h5>
                         <div className="matchbetting__firstteam" style={DisibelStyle}>
-                            <h2>
+                            <h5>
                                 <p className='check active' name='fteam' id='fteam' onClick={e => Checkbox(e)}></p>
                                 Contunio to accont
-                            </h2>
+                            </h5>
                             <div className="title">
                                 <div className="left">
                                     <p>{FTeam.name}</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur .</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
                                     <label htmlFor="">Bonos</label>
-                                    <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelF} step={5} min={0} max={People.status} type="number" name="" id="" />
-
                                 </div>
                                 <div className="right">
                                     <img src={FTeam.img} alt="" />
-                                    <button type='button' disabled={DisibelF} onClick={Close} className="btn btn-outline-light px-4 mt-4">
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-8">
+                                    <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelF} step={5} min={0} max={People.status} type="number" name="" id="" />
+                                </div>
+                                <div className="col-4 text-center">
+                                    <button type='button' disabled={DisibelF} onClick={Close} className="btn btn-outline-light px-4 py-1 mt-2">
                                         Close
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-12 col-md-6 p-1">
                         <div className="matchbetting__firstteam" style={DisibelStyle}>
-                            <h2>
+                            <h5>
                                 <p className='check' name='lteam' id='lteam' onClick={e => Checkbox(e)}></p>
                                 Contunio to accont
-                            </h2>
+                            </h5>
                             <div className="title">
                                 <div className="left">
                                     <p>{LTeam.name}</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur .</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
                                     <label htmlFor="">Bonos</label>
-                                    <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelL} step={5} min={0} max={People.status} type="number" name="" id="" />
-
                                 </div>
                                 <div className="right">
                                     <img src={LTeam.img} alt="" />
-                                    <button type='button' onClick={Close} disabled={DisibelL} className="btn btn-outline-light px-4 mt-4">
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-8">
+                                    <input onChange={(e) => setBonos(e.target.value)} className='mt-2' disabled={DisibelL} step={5} min={0} max={People.status} type="number" name="" id="" />
+                                </div>
+                                <div className="col-4 text-center">
+                                    <button type='button' onClick={Close} disabled={DisibelL} className="btn btn-outline-light px-4 py-1 mt-2">
                                         Close
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </div>
                 </form>
             </div>
+            <ToastContainer />
         </>
     )
 }

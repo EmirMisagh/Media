@@ -9,23 +9,33 @@ import 'swiper/css/scrollbar';
 import { useEffect, useState } from 'react';
 import BettingPoster from '../../components/BettingPoster';
 import API from '../../components/tools/Api'
+import Matches from '../../components/Matches'
+import MatchResult from '../../components/MatchResult';
 
 
 
-export default function Matches() {
+export default function MatchesList() {
   const [MatchesApi, setMatchesApi] = useState([])
+  const [MatchesResult, setMatchesResult] = useState([])
+
+  const query = new URLSearchParams(window.location.search);
+  const token = query.get('league')
+  console.log(token)//123
 
   useEffect(() => {
-    API.get(`match`)
+    API.get(`match/now/`)
       .then(responce => {
         setMatchesApi(responce.data.data)
-        console.log(responce.data.data)
+      })
+    API.get(`match/result/`)
+      .then(responce => {
+        setMatchesResult(responce.data.data)
       })
   }, [])
   return (
     <div className="container-fluid">
       <div className="container mainmatches">
-        <div className="container px-md-5">
+        <div className="container px-md-3">
           <div className="row p-0">
             <Swiper
               className='swiper mt-3'
@@ -55,25 +65,24 @@ export default function Matches() {
         <div className="row main-all">
           <div className="col-12 col-md-6 order-2 order-md-1">
             <div className="button-trand">
-              <input type="text" id='searchmusic' placeholder='How Track?' /><br />
-              <button className='btn btn-outline-light ms-2'>Trand</button>
-              <button className='btn btn-outline-light ms-2'>Top</button>
-              <button className='btn btn-outline-light ms-2'>Recommended</button>
+              <input value={token} type="text" id='searchmusic' placeholder='How Match?' /><br />
+             
             </div>
-          </div>
-          <div className="col-12 col-md-6 order-1 order-md-2 mood-trand">
-
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-8 p-0">
             <div className='main-music'>
               <h5 className='ps-3' id='titrmain'>Recommended music</h5><hr />
-              <div className="grid-all" id='grid-al'>
-
-              </div>
               <div className="grid-all" id='grid-all'>
-
+              {MatchesApi.map((match, i) => {
+              if (i < 8)
+                return (
+                  <NavLink key={i} to={`/football/match/${match._id}`}>
+                    <Matches game={match} />
+                  </NavLink>
+                )
+            })}
               </div>
             </div>
           </div>
@@ -85,8 +94,15 @@ export default function Matches() {
                 <button className='btn btn-outline-primary ms-2'>Today</button>
               </div>
               <div className="main-time">
-                <div className='tomore'>
-
+                <div className='tomore px-3'>
+                {MatchesResult.map((match, i) => {
+              if (i < 8)
+                return (
+                  <NavLink key={i} to={`/football/match/${match._id}`}>
+                    <MatchResult game={match} />
+                  </NavLink>
+                )
+            })}
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BsFacebook } from "react-icons/bs";
+import { MdModeNight, MdOutlineModeNight } from "react-icons/md";
 import { AiFillInstagram, AiFillTwitterCircle, AiFillLinkedin, AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { Autoplay, Navigation, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,17 +11,22 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Menu from './Menu';
 import API from './tools/Api';
+import Functions from './tools/Functions';
 import ResultHeader from './ResultHeader';
 import { BsChevronCompactDown } from "react-icons/bs";
 
 
 export default function Header() {
+    const [DarkIcon, setDarkIcon] = useState(<MdOutlineModeNight />);
+    const [Dark, setDark] = useState(true);
     const [Token, setToken] = useState('');
     const [Admin, setAdmin] = useState('');
     const [Search, setSearch] = useState('');
     const [Menuon, setMenuon] = useState(0);
     const [Result, setResult] = useState([]);
     const [Teams, setTeams] = useState([]);
+    const [Matches, setMatches] = useState([]);
+    const [MatchesSearch, setMatchesSearch] = useState([]);
     const [TeamsSearch, setTeamsSearch] = useState([]);
     const [Leagues, setLeagues] = useState([]);
     const [LeaguesSearch, setLeaguesSearch] = useState([]);
@@ -33,6 +39,11 @@ export default function Header() {
     useEffect(() => {
         setToken(localStorage.getItem('token'));
         setAdmin(localStorage.getItem('admin'));
+        API.get('match/now')
+            .then(response => {
+                setMatches(response.data.data)
+                setMatchesSearch(response.data.data)
+            })
         API.get('team')
             .then(response => {
                 setTeams(response.data.data)
@@ -43,8 +54,6 @@ export default function Header() {
                 setLeagues(response.data.data)
                 setLeaguesSearch(response.data.data)
             })
-
-
         API.get('match/result/')
             .then(response => {
                 setResult(response.data.data)
@@ -127,20 +136,46 @@ export default function Header() {
                 }
             });
             setLeaguesSearch(serch)
-            console.log(LeaguesSearch)
         } else {
-
             setLeaguesSearch(Leagues)
-
+        }
+        if (searchmusic.value != '') {
+            let serch = Matches.filter(user => {
+                if (NameTeam(user.fristteam).toLowerCase().includes(searchmusic.value.toLowerCase()) || NameTeam(user.lastteam).toLowerCase().includes(searchmusic.value.toLowerCase())) {
+                    return user;
+                }
+            });
+            setMatchesSearch(serch)
+        } else {
+            setMatchesSearch(Matches)
         }
 
     }
+
+    const NameTeam = (id) => {
+        const team = Teams.find(i => i._id == id);
+        const nam = team.name;
+        return nam;
+    }
+
+    const DarkHandle = () => {
+        const bod = document.querySelector('body');
+        if (Dark === true) {
+          bod.id = 'dark';
+          setDark(false)
+          setDarkIcon(<MdModeNight />)
+        } else{
+          bod.id = '';
+          setDark(true)
+          setDarkIcon(<MdOutlineModeNight />)
+        }
+      }
 
     return (
         <>
             <nav className="navic container-fluid p-0">
                 <div className="row navic__top">
-                    <div className="col-4 col-sm-6 col-md-3 c1 ">
+                    <div className="col-6 col-sm-6 col-md-3 c1 ">
                         <NavLink to='/'>
                             <h3>
                                 VC
@@ -150,7 +185,7 @@ export default function Header() {
                     </div>
                     <div className="col-6 col-md-6 c2">
                         <div className='p-0 input-search'>
-                            <input onChange={(e) => searchpost(e)} type="text" name="" id="" placeholder='Search' />
+                            <input onChange={(e) => searchpost(e)} onKeyDown={(event) => Functions(event)} type="text" name="" id="Search" placeholder='Search' />
                             <div className="searchmenu">
                                 <ul>
                                     <li>Results</li>
@@ -202,18 +237,18 @@ export default function Header() {
                                     <li>
                                         Team Soccer <br />
                                         <small>
-                                        {TeamsSearch.length != 0 ? (
-                                            TeamsSearch.map((team, i) => {
-                                                if (i < 25)
-                                                    return (
-                                                        <NavLink to={`/football/team/${team._id}`} key={i} >
-                                                            <small key={i}>
-                                                                {" " + team.name} |
-                                                            </small>
-                                                        </NavLink>
+                                            {TeamsSearch.length != 0 ? (
+                                                TeamsSearch.map((team, i) => {
+                                                    if (i < 25)
+                                                        return (
+                                                            <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                                <small key={i}>
+                                                                    {" " + team.name} |
+                                                                </small>
+                                                            </NavLink>
 
-                                                    )
-                                            })
+                                                        )
+                                                })
                                             ) : (
                                                 <small>
                                                     not found
@@ -227,12 +262,12 @@ export default function Header() {
                                     <li>
                                         Matches <br />
                                         <small>
-                                            {Teams.map((team, i) => {
-                                                if (i < 15)
+                                            {MatchesSearch.map((team, i) => {
+                                                if (i < 11)
                                                     return (
-                                                        <NavLink to={`/football/team/${team._id}`} key={i} >
+                                                        <NavLink to={`/football/match/${team._id}`} key={i} >
                                                             <small key={i}>
-                                                                {" " + team.name} |
+                                                                {" " + NameTeam(team.fristteam)} vs {NameTeam(team.lastteam)} |
                                                             </small>
                                                         </NavLink>
 
@@ -826,6 +861,11 @@ export default function Header() {
                                         <AiFillLinkedin />
                                     </i>
                                 </NavLink>
+                            </li>
+                            <li>
+                                    <i onClick={DarkHandle}>
+                                        {DarkIcon}
+                                    </i>
                             </li>
                             <li id="btn-menu">
                                 <button onClick={() => MenuHandle()}><AiOutlineMenu /></button>

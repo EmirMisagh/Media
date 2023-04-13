@@ -21,8 +21,10 @@
             @media (max-width: 767px) {
                 display: flex;
             }
+
             h6 {
                 text-align: center;
+
                 button {
 
                     background-color: rgba(0, 0, 0, 0.4);
@@ -34,6 +36,7 @@
                     font-family: 'Rokkitt', serif;
                     font-size: 19px;
                 }
+
                 button:hover {
                     border: 2px solid rgb(255, 255, 255);
                     color: rgb(255, 255, 255);
@@ -43,6 +46,7 @@
 
         .swiper {
             z-index: 0;
+
             .swiper-pagination {
                 display: flex;
                 justify-content: end;
@@ -81,13 +85,15 @@
     &__newsgrid {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
         border-top: 1px solid rgba(255, 255, 255, 0.5);
         padding-top: 15px;
         overflow: hidden;
+
         .newsgrid {
             display: grid;
             gap: 10px;
+
             @media (max-width: 767px) {
                 display: flex;
                 flex-direction: column;
@@ -105,8 +111,57 @@
         .g-5-5 {
             grid-template-columns: 5fr 5fr;
         }
-        .g-3-2-4 {
-            grid-template-columns: 3fr 2fr 5fr;
+
+        .g-3-7 {
+            grid-template-columns: 3fr 7fr;
+
+            .newsscreen {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                @media (max-width: 767px) {
+                    gap: 10px;
+                }
+            }
+        }
+
+        .g-3-3-3 {
+            grid-template-columns: 3fr 3fr 3fr;
+
+            .newsscreen {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                @media (max-width: 767px) {
+                    gap: 10px;
+                }
+
+                .moreBtnMatch {
+                    text-align: center;
+
+                    button {
+                        width: 100%;
+                        background-color: rgba(0, 0, 0, 0.4);
+                        padding: 4px 90px;
+                        border-radius: 7px;
+                        border: 2px solid rgba(0, 0, 0, 0.2);
+                        color: rgb(216, 216, 216);
+                        transition: .4s;
+                        font-family: 'Rokkitt', serif;
+                        font-size: 19px;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        -webkit-box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.27);
+                        box-shadow: 0px -0px 5px 1px rgba(255, 255, 255, 0.24);
+                    }
+
+                    button:hover {
+                        border: 1px solid rgb(255, 255, 255);
+                        color: rgb(255, 255, 255);
+                    }
+                }
+            }
         }
     }
 
@@ -129,7 +184,6 @@
 
         .g-3-4-3 {
             grid-template-columns: 3fr 4fr 3fr;
-
         }
 
         .g-3-3-4 {
@@ -137,13 +191,13 @@
         }
 
         .g-5-5 {
-
             grid-template-columns: 5fr 5fr;
         }
     }
 
     &__containervideo {
         border-top: 1px solid rgba(255, 255, 255, 0.5);
+
         .mainvideo {
             margin: 20px 0;
 
@@ -154,6 +208,7 @@
                     overflow: hidden;
                     white-space: nowrap;
                 }
+
                 p {
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 }
@@ -161,6 +216,7 @@
 
             .video {
                 padding: 0;
+
                 video {
                     width: 100%;
                 }
@@ -173,10 +229,11 @@
             text-align: right;
             cursor: pointer;
         }
-        .more:hover{
+
+        .more:hover {
             color: aliceblue;
         }
     }
 
-  
+
 }

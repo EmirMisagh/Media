@@ -4,13 +4,15 @@ import { useParams } from 'react-router-dom'
 import API from '../../components/tools/Api'
 import NewsSm from '../../components/NewsSm'
 import LeagueTable from '../../components/LeagueTable'
+import { NavLink } from 'react-router-dom';
+import Matches from '../../components/Matches'
 
 export default function Team() {
   const [News, setNews] = useState([])
   const [Team, setTeam] = useState([])
   const [League, setLeague] = useState([])
   const [ImgTeam, setImgTeam] = useState([])
-
+  const [MatchesApi, setMatchesApi] = useState([])
 
   const { id } = useParams()
 
@@ -27,6 +29,10 @@ export default function Team() {
             setLeague(res.data.data)
           })
       })
+    API.get(`match`)
+      .then(responce => {
+        setMatchesApi(responce.data.data)
+      })
   }, [id])
 
   return (
@@ -38,52 +44,90 @@ export default function Team() {
               <h2>{Team.name}</h2>
             </div>
             <div className="col-6 img text-right">
-              <img src={League.img} alt="" />
+              <div className="imgg">
+                <img src={League.img} alt="" />
+
+              </div>
             </div>
           </div>
         </nav>
       </header>
       <div className='container main mt-4'>
-
         <div className="row main__newsgrid border-0 mt-1">
-          <div className="newsgrid g-3-2-4 col-12">
-            {News.map((newes, i) => {
-              if (i < 4)
-                return (
-                  <NewsSm key={i} news={newes} />
-                )
-            })}
-            <LeagueTable table={League} />
-            {/* <NewsSm />
-        <NewsVid />
-        <NewsSm />
-        <NewsVid /> */}
-          </div>
+          <div className="newsgrid g-3-3-3 col-12">
+            <div className=''>
+              {News.map((newes, i) => {
+                if (i < 1)
+                  return (
+                    <>
+                      <NavLink to={`/news/${newes._id}`} key={i}>
 
+                        <NewsSm news={newes} clas={'newsSmTak'} />
+                      </NavLink>
+                    </>
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i > 0 && i < 3)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {MatchesApi.map((match, i) => {
+                if (i < 3)
+                  return (
+                    <NavLink key={i} to={`/football/match/${match._id}`}>
+                      <Matches game={match} />
+                    </NavLink>
+                  )
+              })}
+              <div className='moreBtnMatch'>
+                <NavLink to={`/football/matches/?league=${id}`}>
+                  <button>More</button>
+                </NavLink>
+              </div>
+            </div>
+          </div>
           <div className="newsgrid g-3-3-2-2 col-12">
             {News.map((newes, i) => {
-              if (i > 4 && i < 9)
-                return (
-                  <NewsSm key={i} news={newes} />
-                )
-            })}
-            {/* <NewsSm />
-        <NewsVid />
-        <NewsSm />
-        <NewsVid /> */}
-          </div>
-          <div className="newsgrid g-3-2-3-2 col-12">
-            {News.map((newes, i) => {
               if (i < 4)
                 return (
                   <NewsSm key={i} news={newes} />
                 )
             })}
-            {/* <NewsSm />
-        <NewsVid />
-        <NewsSm />
-        <NewsVid /> */}
           </div>
+          <div className="newsgrid g-3-7 col-12">
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i < 5)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div>
+              <LeagueTable table={League} />
+            </div>
+          </div>
+
         </div>
       </div>
     </>

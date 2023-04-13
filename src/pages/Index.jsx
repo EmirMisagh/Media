@@ -7,13 +7,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import NewsVid from '../components/NewsVid';
 import { NavLink } from 'react-router-dom';
 import Matches from '../components/Matches';
 import API from '../components/tools/Api'
 import BettingPoster from '../components/BettingPoster';
 import Stiker from '../components/Stiker';
 import LiveVideo from '../components/LiveVideo';
+import MatchResult from '../components/MatchResult';
+import Functions from '../components/tools/Functions';
 
 
 export default function Index() {
@@ -41,7 +42,9 @@ export default function Index() {
       .then(responce => {
         setMatchesApi(responce.data.data)
       })
-    if (window.innerWidth < 890) {
+      if (window.innerWidth < 300) {
+        setSlidResult(2)
+      }else if (window.innerWidth < 890) {
       setSlidResult(3)
     } else if (window.innerWidth < 1263) {
       setSlidResult(4)
@@ -52,7 +55,9 @@ export default function Index() {
   }, [])
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth < 890) {
+    if (window.innerWidth < 300) {
+      setSlidResult(1)
+    }else if (window.innerWidth < 890) {
       setSlidResult(3)
     } else if (window.innerWidth < 1263) {
       setSlidResult(4)
@@ -61,6 +66,7 @@ export default function Index() {
     }
   })
 
+  window.addEventListener('keypress', (e) => Functions(e))
 
 
 
@@ -106,7 +112,7 @@ export default function Index() {
             >
               {News.map((newes, i) => {
                 if (i < 11)
-                 if (newes.video == false)
+                  if (newes.video == false)
                     return (
                       <SwiperSlide key={i}>
                         <NavLink to={`/news/${newes._id}`}>
@@ -119,14 +125,15 @@ export default function Index() {
             </Swiper>
             <div className="gridnews p-0 mt-3">
               {News.map((newes, i) => {
-                if (i < 1)
+                if (i < 3)
                   return (
-                    <NewsSm key={i} news={newes} />
+                    <NavLink to={`/news/${newes._id}`} key={i}>
+                      <NewsSm news={newes} />
+                    </NavLink>
                   )
               })}
               {/* <NewsSm /> */}
-              <NewsVid />
-              <NewsVid />
+
 
             </div>
           </div>
@@ -169,6 +176,53 @@ export default function Index() {
           </div>
         </div>
         <div className="row main__newsgrid mt-1">
+          <div className="newsgrid g-3-3-3 col-12">
+            <div className=''>
+              {News.map((newes, i) => {
+                if (i < 1)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmTak'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i < 2)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i < 1)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+          </div>
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
               if (i < 4)
@@ -185,7 +239,7 @@ export default function Index() {
               if (i < 2)
                 return (
                   <div key={i}>
-                    <NavLink to={`/news/${newes._id}`} key={i}>
+                    <NavLink to={`/news/${newes._id}`} >
                       <NewsLg newsprops={newes} />
                     </NavLink>
                   </div>
@@ -205,7 +259,7 @@ export default function Index() {
           </div>
           <div className="newsgrid g-3-2-3-2 col-12">
             {News.map((newes, i) => {
-               if (i > 7 && i < 12)
+              if (i > 7 && i < 12)
                 return (
                   <NavLink to={`/news/${newes._id}`} key={i}>
 
@@ -213,6 +267,53 @@ export default function Index() {
                   </NavLink>
                 )
             })}
+          </div>
+          <div className="newsgrid g-3-3-3 col-12">
+            <div className=''>
+              {News.map((newes, i) => {
+                if (i < 1)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmTak'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i < 3)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
+            <div className='newsscreen'>
+              {News.map((newes, i) => {
+                if (i < 3)
+                  return (
+                    <>
+
+                      <NavLink to={`/news/${newes._id}`} key={i}>
+
+                        <NewsSm news={newes} clas={'newsSmSC'} />
+                      </NavLink>
+                    </>
+
+                  )
+              })}
+            </div>
           </div>
         </div>
         <div className="row mt-5 main__titr">
@@ -222,18 +323,19 @@ export default function Index() {
             </h5>
           </div>
           <div className="col-4 more">
-          <NavLink to='/football/matches'>
-            <h5 className='more'>
-              more
-            </h5>
+            <NavLink to='/football/matches'>
+              <h5 className='more'>
+                more
+              </h5>
             </NavLink>
           </div>
         </div>
         <div className="row main__bettingposter mt-1">
           <div className="newsgrid g-3-4-3 col-12">
-            {MatchesApi.map((match, i) => {
+            {MatchesApi.filter(i => i.poster != '').map((match, i) => {
               if (i < 3)
                 return (
+
                   <NavLink key={i} to={`/football/match/${match._id}`}>
                     <BettingPoster game={match} />
                   </NavLink>
@@ -292,7 +394,7 @@ export default function Index() {
                 <LiveVideo key={i} game={item} />
               ) : (
                 <div className="row mainvideo" key={i}>
-                  <div className="col-12 col-md-8 order-2 order-md-1 title">
+                  <div className="col-12 col-md-8 order-2 order-md-1 title mt-3 mt-md-0">
                     <h1>Lorem ipsum dolor sit amet.</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic quos id architecto temporibus, tempora quaerat blanditiis incidunt impedit ea odit saepe, ad optio nesciunt assumenda! Aperiam placeat sit est?</p>
                   </div>
@@ -310,7 +412,7 @@ export default function Index() {
               ))
           })}
           <div className="row mainvideo">
-            <div className="col-12 col-md-8 order-2 order-md-1 title">
+            <div className="col-12 col-md-8 order-2 order-md-1 title mt-3 mt-md-0">
               <h1>Lorem ipsum dolor sit amet.</h1>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic quos id architecto temporibus, tempora quaerat blanditiis incidunt impedit ea odit saepe, ad optio nesciunt assumenda! Aperiam placeat sit est?</p>
             </div>
@@ -336,14 +438,14 @@ export default function Index() {
                 </p>
               </video>
             </div>
-            <div className="col-12 col-md-8 order-1 order-md-2 title">
+            <div className="col-12 col-md-8 order-1 order-md-2 title mt-3 mt-md-0">
               <h1>Lorem ipsum dolor sit amet.</h1>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic quos id architecto temporibus, tempora quaerat blanditiis incidunt impedit ea odit saepe, ad optio nesciunt assumenda! Aperiam placeat sit est?</p>
 
             </div>
           </div>
           <div className="row mainvideo">
-            <div className="col-12 col-md-8 order-2 order-md-1  title">
+            <div className="col-12 col-md-8 order-2 order-md-1  title mt-3 mt-md-0">
               <h1>Lorem ipsum dolor sit amet.</h1>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic quos id architecto temporibus, tempora quaerat blanditiis incidunt impedit ea odit saepe, ad optio nesciunt assumenda! Aperiam placeat sit est?</p>
 
@@ -375,7 +477,6 @@ export default function Index() {
           </div>
 
         </div>
-
       </div>
     </>
   )

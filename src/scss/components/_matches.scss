@@ -14,31 +14,39 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
 
     cursor: pointer;
+
     .left {
         width: 35%;
         padding: 5px 0;
         font-family: 'Cinzel', serif;
+
         img {
             width: 55%;
             height: 65%;
             margin: 0;
             opacity: 0.9;
+            border: 0;
         }
+
         p {
             font-size: 11px;
             font-weight: 600;
             padding: 0;
             margin-top: 4px;
+            color: rgb(221, 221, 221);
         }
     }
+
     .date {
         display: flex;
         flex-direction: column;
         padding: 10px 0;
+
         small {
             font-size: 11px;
             font-weight: 900;
         }
+
         b {
             font-size: 26px;
             font-weight: 900;
@@ -46,26 +54,99 @@
             padding-top: 0;
         }
     }
+
     .right {
         padding: 5px 0;
         width: 35%;
         font-family: 'Cinzel', serif;
+
         img {
             width: 55%;
             height: 65%;
             margin: 0;
             opacity: 0.9;
+            border: 0;
         }
+
         p {
             font-size: 11px;
             font-weight: 600;
             margin-top: 4px;
             padding: 0;
+            color: rgb(221, 221, 221);
         }
     }
 }
 
-.match:hover {
+.match:hover,
+.match:focus {
     background-color: rgba(0, 0, 0, 0.6);
     color: aliceblue;
+    border: 1px solid rgb(161, 161, 161);
+
+    // box-shadow: inset 0 -3.25em 0 0 var(adjust-hue($color, 45deg));
+}
+
+.matchresult {
+    font-family: 'Cinzel', serif;
+    margin-top: 10px;
+    .top {
+        .left {
+            padding: 0;
+        }
+        .right {
+            padding: 0;
+        }
+        .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+            small {
+                font-size: 11px;
+                font-weight: 900;
+            }
+
+            b {
+                font-size: 26px;
+                font-weight: 900;
+                margin: 0;
+                padding-top: 0;
+            }
+        }
+        .result {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+    }
+
+    .bottom {
+        background-color: aliceblue;
+        color: black;
+        align-items: center;
+        margin: 0;
+        margin-top: 10px;
+        -webkit-box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.27);
+                        box-shadow: 0px -8px 5px 1px rgba(255, 255, 255, 0.24);
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            align-items: center;
+            margin: 0;
+            color: black;
+        }
+
+        small {
+        }
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        opacity: 0.9;
+        border: 0;
+    }
 }

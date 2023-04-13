@@ -76,7 +76,7 @@ export default function Index() {
                 setMain(<Dashboard />)
                 break;
             case 'Betting':
-                setMain(<Betting />)
+                setMain(<Betting user={People} />)
                 break;
 
             default:
@@ -164,7 +164,7 @@ export default function Index() {
                                                             Happy
                                                         </i><br />
                                                         <small>
-                                                            {item.message}
+                                                            win {item.bonos} bonos
                                                         </small>
                                                     </i>
                                                     {item.view == false && (

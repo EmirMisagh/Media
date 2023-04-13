@@ -18,6 +18,7 @@
 }
 .usernew {
     padding: 0px;
+    width: 100%;
     .userContainer {
         display: flex;
         margin-top: 0px;
@@ -50,7 +51,7 @@
                     margin-top: 10px;
                     margin-left: 20px;
                     position: relative;
-
+                    min-width: 110px;
                     label {
                         font-size: 14px;
                         margin-bottom: 5px;
@@ -58,15 +59,16 @@
 
                     input {
                         border: none;
-                        width: 250px;
+                    
+                        width: 100%;
                         border-bottom: 1px solid gray;
                         padding: 0px 6px;
                         outline: none;
                         background: none;
                         color: rgb(248, 234, 234);
-                        @media (max-width: 865px) {
-                            width: 110px;
-                        }
+                        // @media (max-width: 1065px) {
+                        //     width: 110px;
+                        // }
                     }
 
                     select {

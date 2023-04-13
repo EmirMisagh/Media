@@ -66,7 +66,7 @@ export default function LeagueTable(props) {
                                         {team.number < 4 ? (
                                             <img src="http://localhost:3001/image/Tools/logo/champions.png" alt="" />
                                         ) : (
-                                            <img src="http://localhost:3001/image/Tools/logo/euro.png" alt="" />
+                                            <img src="http://localhost:3001/image/Tools/logo/europa.png" alt="" />
                                         )}
                                         {team.number}
                                     </td>

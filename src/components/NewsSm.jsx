@@ -10,7 +10,7 @@ export default function NewsSm(props) {
   const date = new Date(props.news.date)
 
   useEffect(() => {
-
+    
     setTimeout(() => {
 
       setLoding(1)
@@ -37,17 +37,17 @@ export default function NewsSm(props) {
       {Loding === 0 ? (
         <LodingCom />
       ) : (
-        <div className='newsSm'>
+        <div className={`newsSm ${props.clas}`}>
           <div className="img">
             {props.news.video === true ? (
               <>
-                <div className="video">
-                  <video width="100%" height="100%">
+                <div className="video m-0">
+                  <video>
                     <source src={props.news.img} type="video/webm" />
                     <source src={props.news.img} type="video/mp4" />
                     <p>
                       Your browser doesn't support HTML video. Here is a
-                      <a href="myVideo.mp4">link to the video</a> instead.
+                      {/* <a href="myVideo.mp4">link to the video</a> instead. */}
                     </p>
                   </video>
                   <div className="icon">
